@@ -2,19 +2,19 @@ import React from "react";
 import styled from "styled-components";
 const BackgroudImg = styled.div`
     width: 100%;
-    height: 564px;
+    height: 937px;
     background-color: lightgray;
     //배경 색 페이지 구분용 삭제예정
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 373px 0 0 0;
 `
 const ArticleWrapper = styled.div`
     width: 500px;
     height: 185px;
     text-align: center;
     border: 1px solid black;
+    margin-top: 373px;
 `
 const Title = styled.span`
     display: block;
