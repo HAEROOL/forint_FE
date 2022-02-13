@@ -1,10 +1,10 @@
 import React from 'react';
+import MainPage from './page/MainPage';
+
 
 function App() {
   return (
-    <div>
-      asdf
-    </div>
+    <MainPage/>
   );
 }
 
