@@ -26,10 +26,12 @@ const Description = styled.span`
     font-size: 30px;
 `
 const TryButton = styled.div`
+    display: flex;
+    justify-content: center;
     width: 140px;
     height: 45px;
     font-size: 19px;
-    text-align: center;
+    align-items: center;
     background: #000;
     color: white;
     border-radius: 5px;
