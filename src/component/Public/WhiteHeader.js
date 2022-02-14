@@ -4,7 +4,6 @@ import styled from "styled-components";
 const HeaderWrapper = styled.div`
     width: 1788px;
     height: 107px;
-    position: fixed;
     top: 0;
     padding: 0 66px 0 66px;
     background: #fff;
