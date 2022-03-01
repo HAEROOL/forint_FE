@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 const BackgroudImg = styled.div`
     width: 100%;
@@ -25,7 +26,7 @@ const Description = styled.span`
     display: block;
     font-size: 30px;
 `
-const TryButton = styled.div`
+const TryButton = styled(Link)`
     display: flex;
     justify-content: center;
     width: 140px;
@@ -37,6 +38,7 @@ const TryButton = styled.div`
     border-radius: 5px;
     cursor: pointer;
     margin-top: 181px;
+    text-decoration-line: none;
 `
 const InitialPage = () =>{
     return (
@@ -45,7 +47,7 @@ const InitialPage = () =>{
                 <Title>졸작이름</Title>
                 <Description>설명설명설명설명설명설명설명설명</Description>
             </ArticleWrapper>
-            <TryButton>Try</TryButton>
+            <TryButton to='/fontcreate'>Try</TryButton>
         </BackgroudImg>
     )   
 }
