@@ -6,7 +6,6 @@ const PageWrapper = styled.div`
     background: #000;
     width: 1920px;
     height: 937px;
-    position: alsolute;
 `
 const LoginForm = () => {
     return (
