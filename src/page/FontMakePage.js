@@ -6,7 +6,7 @@ import FirsrtPannel from "../component/FontMake/FirstPannel_DownTemplete";
 import FourthPannel from "../component/FontMake/FourthPage_CompleteFont";
 import SecondPannel from "../component/FontMake/SecondPannel_Upload";
 import ThirdPannel from "../component/FontMake/ThirdPannel_Loading";
-import WhiteHeader from "../component/Public/WhiteHeader";
+import Header from "../component/Public/Header";
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -16,7 +16,7 @@ const PageWrapper = styled.div`
 const FontMakePage = () => {
     return(
         <PageWrapper>
-            <WhiteHeader/>
+            <Header/>
             <FirsrtPannel/>
             <SecondPannel/>
             <ThirdPannel/>

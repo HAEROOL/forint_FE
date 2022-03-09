@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import WhiteHeader from "../component/Public/WhiteHeader";
+import Header from "../component/Public/Header";
 import SignForm from "../component/SignPage/SignForm";
 
 const SignPageWrapper = styled.div`
@@ -9,7 +9,7 @@ const SignPageWrapper = styled.div`
 const SignPage = () => {
     return (
         <SignPageWrapper>
-            <WhiteHeader/>
+            <Header/>
             <SignForm/>
         </SignPageWrapper>
     )

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import LoginForm from "../component/LoginPage/LoginForm";
-import WhiteHeader from "../component/Public/WhiteHeader";
+import Header from "../component/Public/Header";
 
 const LoginPageWrapper = styled.div`
     background: #fff;
@@ -10,7 +10,7 @@ const LoginPageWrapper = styled.div`
 const LoginPage = () => {
     return (
         <LoginPageWrapper>
-            <WhiteHeader/>
+            <Header/>
             <LoginForm/>
         </LoginPageWrapper>
     )

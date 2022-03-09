@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Profile from "../component/MyPage/Profile";
-import WhiteHeader from "../component/Public/WhiteHeader";
+import Header from "../component/Public/Header";
 
 const PageWrapper = styled.div`
     width: 100%;
@@ -12,7 +12,7 @@ const PageWrapper = styled.div`
 const MyPage = () =>{
     return(
         <PageWrapper>
-            <WhiteHeader/>
+            <Header/>
             <Profile/>
         </PageWrapper>
     )
