@@ -14,7 +14,7 @@ export const SignFromWrapper = styled.div`
     top: 5%;
 `
 
-export const FormWrapper = styled.div`
+export const FormWrapper = styled.form`
     width: 360px;
     height: 557px;
     display: flex;

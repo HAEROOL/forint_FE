@@ -11,6 +11,7 @@ export const FormInput = styled.input`
     border: 2px solid #000;
     border-radius: 5px;
     font-size: 18px;
+    outline: none;
 `
 export const FormName = styled.span`
     font-size: 20px;
