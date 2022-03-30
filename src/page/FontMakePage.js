@@ -1,4 +1,5 @@
 import React from "react";
+import { Route, Routes } from "react-router";
 import styled from "styled-components";
 import FifthPannel from "../component/FontMake/FifthPannel_DisplayFont";
 import FinalPannel from "../component/FontMake/FinalPannel";
@@ -10,19 +11,21 @@ import Header from "../component/Public/Header";
 
 const PageWrapper = styled.div`
     width: 100%;
-    // height: 937px;
+    height: 937px;
     background: #000;
 `
 const FontMakePage = () => {
     return(
         <PageWrapper>
             <Header/>
-            <FirsrtPannel/>
-            <SecondPannel/>
-            <ThirdPannel/>
-            <FourthPannel/>
-            <FifthPannel/>
-            <FinalPannel/>
+            <Routes>
+                <Route path="/" element={<FirsrtPannel/>}/>
+                <Route path="/second" element={<SecondPannel/>}/>
+                <Route path="/third" element={<ThirdPannel/>}/>
+                <Route path="/fourth" element={<FourthPannel/>}/>
+                <Route path="/fifth" element={<FifthPannel/>}/>
+                <Route path="/final" element={<FinalPannel/>}/>
+            </Routes>
         </PageWrapper>
     )
 }

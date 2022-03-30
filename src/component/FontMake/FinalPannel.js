@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import * as S from './Public.style'
 
@@ -19,7 +20,7 @@ const StyledPannel = styled(S.Pannel)`
     justify-content: center;
     align-items: center;
 `
-const MoveBtn = styled.div`
+const MoveBtn = styled(Link)`
     width: 172px;
     height: 51px;
     display: flex;
@@ -37,7 +38,7 @@ const FinalPannel = () => {
             <TextContent>
             (설정한 이름)이 공유됐어요 다른사람들의 폰트도 보러갈까요?
             </TextContent>
-            <MoveBtn>보러가기</MoveBtn>
+            <MoveBtn to='/lookout'>보러가기</MoveBtn>
             </StyledPannel>
         </S.Container>
     )

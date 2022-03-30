@@ -38,8 +38,8 @@ const FifthPannel = () => {
                 <FontNameInput placeholder="나만의 폰트 이름을 정해주세요"/>
                 </InputWrapper>
                 <S.StepPannel>
-                <S.PrevBtn>공유하기</S.PrevBtn>
-                <S.NextBtn>다운로드</S.NextBtn>
+                <S.PrevBtn to='/fontcreate/final'>공유하기</S.PrevBtn>
+                <S.NextBtn to='/'>다운로드</S.NextBtn>
                 </S.StepPannel>
             </S.Pannel>
         </S.Container>
