@@ -11,9 +11,8 @@ const FirsrtPannel = () => {
                 <S.DownloadBtn>템플릿 다운로드</S.DownloadBtn>
                 </S.DownloadBtnPannel>
                 <S.NextPannel>
-                <S.NextBtn>NEXT</S.NextBtn>
+                <S.NextBtn to='/fontcreate/second'>NEXT</S.NextBtn>
                 </S.NextPannel>
-                
             </S.Pannel>
         </S.Container>
     )

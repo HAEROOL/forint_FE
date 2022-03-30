@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 export const Container = styled.div`
     width: 494px;
@@ -38,7 +39,7 @@ export const DownloadBtn = styled.div`
     margin: 0 auto;
     cursor: pointer;
 `
-export const NextBtn = styled.div`
+export const NextBtn = styled(Link)`
     width: 172px;
     height: 51px;
     display: flex;
@@ -49,7 +50,7 @@ export const NextBtn = styled.div`
     background: #000;
     cursor: pointer;
 `
-export const PrevBtn = styled.div`
+export const PrevBtn = styled(Link)`
     width: 172px;
     height: 51px;
     display: flex;

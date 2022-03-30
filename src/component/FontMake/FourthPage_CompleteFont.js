@@ -28,7 +28,7 @@ const FourthPannel = () => {
             폰트가 완성됐어요! 확인하러 가볼까요?
             </TextContent>
             <S.NextPannel>
-                <S.NextBtn>NEXT</S.NextBtn>
+                <S.NextBtn to='/fontcreate/fifth'>NEXT</S.NextBtn>
             </S.NextPannel>
             </StyledPannel>
             

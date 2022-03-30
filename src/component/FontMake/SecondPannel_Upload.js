@@ -11,8 +11,8 @@ const SecondPannel = () => {
                 <S.DownloadBtn>템플릿 업로드</S.DownloadBtn>
                 </S.DownloadBtnPannel>
                 <S.StepPannel>
-                <S.PrevBtn>PREV</S.PrevBtn>
-                <S.NextBtn>NEXT</S.NextBtn>
+                <S.PrevBtn to='/fontcreate'>PREV</S.PrevBtn>
+                <S.NextBtn to='/fontcreate/third'>NEXT</S.NextBtn>
                 </S.StepPannel>
             </S.Pannel>
         </S.Container>
