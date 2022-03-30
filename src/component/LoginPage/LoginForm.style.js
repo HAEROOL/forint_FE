@@ -48,3 +48,16 @@ export const DeleteAll = styled.div`
     cursor: pointer;
     background: #fff;
 `
+export const SubmitBtn = styled.div`
+    width: 120px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: #fff;
+    border: 2px solid #000;
+    border-radius: 5px;
+    margin: 0 auto;
+    margin-top: 40px;
+`
