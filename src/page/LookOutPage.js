@@ -8,7 +8,7 @@ import Header from "../component/Public/Header";
 
 const PageWrapper = styled.div`
     width: 100%;
-    height: 937px;
+    // height: 937px;
     background: #000;
 `
 

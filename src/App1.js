@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router';
 import FontMakePage from './page/FontMakePage';
 import LoginPage from './page/LoginPage';
@@ -12,19 +12,9 @@ import FirsrtPannel from "./component/FontMake/FirstPannel_DownTemplete";
 import FourthPannel from "./component/FontMake/FourthPage_CompleteFont";
 import SecondPannel from "./component/FontMake/SecondPannel_Upload";
 import ThirdPannel from "./component/FontMake/ThirdPannel_Loading";
+import './App.css'
 import Header from './component/Public/Header';
-import { useDispatch } from 'react-redux';
-import { setRefreshOnHeader } from './api/logined';
-import { refresh } from './store/auth';
-
 function App() {
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    setRefreshOnHeader();
-    dispatch(refresh())
-  },[]);
-  
   return (
     <>
     <Header/>

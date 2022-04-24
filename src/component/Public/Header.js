@@ -4,32 +4,35 @@ import { useLocation } from "react-router";
 import styled from "styled-components";
 
 const HeaderWrapper = styled.div`
-    width: 1788px;
-    height: 107px;
-    padding: 0 66px 0 66px;
-    background: ${props => props.location?'#000':'#fff'};
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #fff;
+    flex-direction: column;
+    font-family: NotoSansKR;
+    margin-bottom: 60px;
 `
 const LogoWrapper = styled(Link)`
+    width: 216px;
+    margin: 0 auto;
+    color: black;
+    text-decoration: none;
+    text-align: center;
 `
-const Logo = styled.img`
-    width: 83px;
-    height: 83px;
+const Logo = styled.div`
+    font-size: 55px;
+    font-family: SueEllenFrancisco;
 `
 const HeaderMenuList = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 640px;
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 400;
 `
-
 const Menu = styled(Link)`
     font-size: 20px;
-    color: ${props => !props.location?'#000':'#fff'};
-    text-decoration-line: none;
-
+    color: black;
+    text-decoration: none;
 `
 
 const Header = () => {
@@ -37,14 +40,13 @@ const Header = () => {
     return (
         <HeaderWrapper location={location.pathname==='/'?1:0}>
             <LogoWrapper to='/'>
-            <Logo/>
+                <Logo>MR.Hant</Logo>
             </LogoWrapper>
             <HeaderMenuList>
-                <Menu to='/' location={location.pathname==='/'?1:0}>홈</Menu>
                 <Menu to='/fontcreate' location={location.pathname==='/'?1:0}>폰트 만들기</Menu>
                 <Menu to='/lookout' location={location.pathname==='/'?1:0}>둘러보기</Menu>
-                <Menu to='/login' location={location.pathname==='/'?1:0}>로그인</Menu>
-                <Menu to='/signup' location={location.pathname==='/'?1:0}>회원가입</Menu>
+                <Menu to='/login' location={location.pathname==='/'?1:0}>마이페이지</Menu>
+                <Menu to='/signup' location={location.pathname==='/'?1:0}>로그아웃</Menu>
             </HeaderMenuList>
         </HeaderWrapper>
     )

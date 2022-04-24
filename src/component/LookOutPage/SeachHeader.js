@@ -7,6 +7,7 @@ const SearchheaderWrapper = styled.div`
     justify-content: end;
     border-bottom: 2px solid #707070;
     margin: 0 auto;
+    margin-top: -120px;
 `
 const SearchInput = styled.input`
     width: 242px;

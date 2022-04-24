@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const DisplayWrapper = styled.div`
-    width: 410px;
+    width: 400px;
     height: 315px;
     margin: 0 145px 50px 0;
 `

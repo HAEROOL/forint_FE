@@ -6,7 +6,7 @@ const ProfilePannel = styled.div`
     height: 687px;
     background: #fff;
     margin: 0 auto;
-    margin-top: 70px;
+    margin-top: -100px;
     display: flex;
     flex-direction: column;
     align-items: center;

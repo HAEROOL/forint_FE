@@ -4,7 +4,7 @@ import FontDisplay from "./FontDisplay";
 
 const Pannel = styled.div`
     width: 1684px;
-    height: 650px;
+    // height: 650px;
     display: flex;
     overflow-y: scroll;
     margin: 0 auto;
