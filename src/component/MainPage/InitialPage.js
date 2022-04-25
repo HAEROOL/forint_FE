@@ -28,6 +28,8 @@ const RightElement = styled.div`
     height: 100%;
     overflow-x: hidden;
     max-width: 561px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px silver;
     @media screen and (max-width: 1050px){
         width: 100%;
         height: auto;
