@@ -2,11 +2,13 @@ import styled from "styled-components";
 export const LoginPlate = styled.div`
     width: 453px;
     height: 381px;
-    background: #fff;
+    border: 1px solid #ddd;
     position: relative;
     top: 250px;
     margin: 0 auto;
     padding: 12px 22px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px silver;
 `
 export const LoginText = styled.span`
     display: flex;
