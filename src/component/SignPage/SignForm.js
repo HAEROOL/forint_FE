@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import * as S from './SignForm.style'
 import * as P from '../Public/FormStyle'
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { checkEmailRegEx } from "../utils/checkRefExp";
 const SignFormPageWrapper = styled.div`
 `
-// 정규표현식 넣어야됨
-// 중복체크는 차후 구현
 // api 관련 확인해야 함
 const SignForm = () => {
     const dispatch = useDispatch()
+    const pwdRef = useRef()
     const [signInfo,setInfo] = useState({
         name:null,
         email: null,
@@ -41,6 +41,19 @@ const SignForm = () => {
                     ...signInfo,
                     password:e.target.value
                 })
+                if(pwdRef.current.value !== e.target.value){
+                    pwdRef.current.style.border = '3px solid red';
+                    setPermit({
+                        ...permitSign,
+                        passwordSame: false
+                    })
+                }else{
+                    pwdRef.current.style.border = '3px solid green';
+                    setPermit({
+                        ...permitSign,
+                        passwordSame: true
+                    })
+                }
                 break;
             case 'nickname':
                 setInfo({
@@ -51,6 +64,10 @@ const SignForm = () => {
             case 'passwordConfirm':
                 if(signInfo.password !== e.target.value){
                     e.target.style.border = '3px solid red';
+                    setPermit({
+                        ...permitSign,
+                        passwordSame: false
+                    })
                 }else{
                     e.target.style.border = '3px solid green';
                     setPermit({
@@ -67,12 +84,43 @@ const SignForm = () => {
 
    console.log(signInfo)
     const checkDuplicateEmail = (e) => {
-        setPermit({
-            ...permitSign,
-            emailDuplicate: true
-        })
+        console.log('계정 중복을 체크합니다.')
+        console.log(signInfo.email)
+        if(checkEmailRegEx(signInfo.email)){
+            // dispatch(checkDuplicate(e.target.email))
+            alert('맞는 형식입니다')
+        }else{
+            alert('이메일 형식에 맞지 않습니다')
+        }
     }
-    console.log(permitSign)
+    // useEffect(() => {
+    //     if(isDuplicate){
+    //         alert('중복된 계정이 존재합니다')
+            // setPermit({
+            //     ...permitSign,
+            //     emailDuplicate: true
+            // })
+    //     }else{
+            // setPermit({
+            //     ...permitSign,
+            //     emailDuplicate: false
+            // })
+    //     }
+    // },[isDuplicateResponse])
+    
+    const submitSignInfo = () => {
+        console.log('회원가입 정보를 넘겨줍니다')
+        if(!(signInfo.email && signInfo.name && signInfo.nickname && signInfo.password)){
+            alert('모두 입력해주세요')
+        }else if(!permitSign.emailDuplicate){
+            alert('중복된 계정입니다. 다른 계정을 사용해주세요')
+        }else if(!permitSign.passwordSame){
+            alert('비밀번호와 비밀번호 확인이 맞지 않습니다')
+        }else{
+            // dispatch(register(signInfo))
+            console.log('회원가입을 진행합니다.')
+        }
+    }
     return(
         <SignFormPageWrapper>
             <S.SignFromWrapper>
@@ -96,7 +144,7 @@ const SignForm = () => {
                 </P.Form>
                 <P.Form checkPass={permitSign.passwordSame}>
                     <P.FormName>PassWord Check</P.FormName>
-                    <P.FormInput type="password" onChange={onChange} name='passwordConfirm'/>
+                    <P.FormInput type="password" onChange={onChange} name='passwordConfirm' ref={pwdRef}/>
                 </P.Form>
                 <P.Form>
                     <P.FormName >Name</P.FormName>
@@ -107,7 +155,7 @@ const SignForm = () => {
                     <P.FormInput onChange={onChange} name='nickname'/>
                 </P.Form>
             </S.FormWrapper>
-            <S.SubmitBtn >회원가입</S.SubmitBtn>
+            <S.SubmitBtn onClick={() => submitSignInfo()} >회원가입</S.SubmitBtn>
         </S.SignFromWrapper>
         </SignFormPageWrapper>
     )
