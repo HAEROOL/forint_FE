@@ -1,104 +1,32 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import * as S from './Profile.Style'
+import ProfileInfoChange from "./ProfileInfoChange";
+const dummy = {
+    account: 'test@testID.com',
+    nickname: 'dummyNick',
+    name: 'dummyname'
+}
 
-const ProfilePannel = styled.div`
-    width: 458px;
-    height: 687px;
-    background: #fff;
-    margin: 0 auto;
-    margin-top: -100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 32px 18px 17px 18px;
-`
-const ProfileImage = styled.img`
-    width: 150px;
-    height: 150px;
-`
-const ProfileContent = styled.div`
-    width: 378px;
-    margin-bottom: 27px;
-`
-const Content = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-`
-const ProfileLabel = styled.label`
-    width: 69px;
-    font-size: 15px;
-`
-const ChangeBtn = styled.div`
-    cursor: pointer;
-    font-size: 12px;
-`
-const ProfileImagePannel = styled.div`
-    width: 150px;
-    text-align: right;
-    margin-bottom: 20px;
-`
-const LabelContent = styled.span`
-    font-size: 25px;
-    margin-left: 22px;
-    font-weight: 600;
-`
-const MyFontPannel = styled.div`
-    width: 309px;
-    height: 69px;
-    border: 1px solid #707070;
-    margin-bottom: 16px;
-    padding: 30px 74px;
-    text-align: center;
-`
-const SaveBtn = styled.div`
-    width: 173px;
-    height: 51px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #000;
-    color: #fff;
-    cursor: pointer;
-`
+
 const Profile = () => {
     return(
-        <ProfilePannel>
-            <ProfileImagePannel>
-                <ProfileImage/>
-                <ChangeBtn>변경</ChangeBtn>
-            </ProfileImagePannel>
+        <S.ProfilePannel>
+            <S.ProfileImagePannel>
+                <S.ProfileImage/>
+                <S.ChangeBtn>변경</S.ChangeBtn>
+            </S.ProfileImagePannel>
             
-            <ProfileContent>
-                <Content>
-                    <ProfileLabel>ID</ProfileLabel>
-                    <ChangeBtn>변경</ChangeBtn>
-                </Content>
-                <LabelContent>testid0123</LabelContent>
-            </ProfileContent>
-            <ProfileContent>
-                <Content>
-                    <ProfileLabel>NICKNAME</ProfileLabel>
-                    <ChangeBtn>변경</ChangeBtn>
-                </Content>
-                <LabelContent>NICKNAMEDEATH</LabelContent>
-            </ProfileContent>
-            <ProfileContent>
-                <Content>
-                    <ProfileLabel>EMAIL</ProfileLabel>
-                    <ChangeBtn>변경</ChangeBtn>
-                </Content>
-                <LabelContent>EMAIL@123.COM</LabelContent>
-            </ProfileContent>
-            <ProfileContent>
-                <Content>
-                    <ProfileLabel>PASSWORD</ProfileLabel>
-                    <ChangeBtn>변경</ChangeBtn>
-                </Content>
-            </ProfileContent>
-            <MyFontPannel>당신의 글씨체를 담아드립니다.</MyFontPannel>
-            <SaveBtn>저장</SaveBtn>
-        </ProfilePannel>
+            <S.ProfileContent>
+                <S.Content>
+                    <S.ProfileLabel>EMAIL</S.ProfileLabel>
+                </S.Content>
+                <S.LabelContent>{dummy.account}</S.LabelContent>
+            </S.ProfileContent>
+            <ProfileInfoChange infoname={'NAME'} content={dummy.name}/>
+            <ProfileInfoChange infoname={'NICKNAME'} content={dummy.nickname}/>
+            <ProfileInfoChange infoname={'PASSWORD'} content={null}/>
+            <S.MyFontPannel>당신의 글씨체를 담아드립니다.</S.MyFontPannel>
+        </S.ProfilePannel>
     )
 }
 
