@@ -36,7 +36,7 @@ const auth = handleActions(
       token: setCookie('refresh_token', `${token.refresh_token}`, {
         path: '/',
       }),
-      token: setAccessTokenOnHeader(token.access_token),
+      accessToken: setAccessTokenOnHeader(token.accessToken),
       isLoggedIn: true,
     }),
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
@@ -49,7 +49,7 @@ const auth = handleActions(
       token: setCookie('refresh_token', `${token.refresh_token}`, {
         path: '/',
       }),
-      token: setAccessTokenOnHeader(token.access_token),
+      accessToken: setAccessTokenOnHeader(token.accessToken),
       isLoggedIn: true,
     }),
     [REFRESH_FAILURE]: (state, { payload: error }) => ({

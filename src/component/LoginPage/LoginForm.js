@@ -3,19 +3,24 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import auth, { login } from "../../store/auth";
+import {useNavigate} from 'react-router-dom';
 import * as S from './LoginForm.style';
 
 const PageWrapper = styled.div`
-    background: #000;
-    width: 1920px;
-    height: 937px;
 `
 const LoginForm = () => {
     const dispatch = useDispatch();
+    const navigation = useNavigate()
+    const {isLoggedIn} = useSelector((state) => state.auth)
     const [loginInfo, setInfo] = useState({
         account: null,
         password: null
     })
+    useEffect(() => {
+        if(isLoggedIn){
+            navigation('/')
+        }
+    },[isLoggedIn])
     const onChange = (e) => {
         const name = e.target.name;
         switch(name){
@@ -34,7 +39,6 @@ const LoginForm = () => {
             default:
                 break;
         }
-console.log(loginInfo)
     }
     const clickLogin = () => {
         console.log(loginInfo.account,loginInfo.password)

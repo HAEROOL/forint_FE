@@ -7,9 +7,10 @@ export const SignFromWrapper = styled.div`
     width: 455px;
     height: 656px;
     padding: 12px 22px;
-    background: #fff;
     margin: 0 auto;
-    border: 1px solid black;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px silver;
     position: relative;
     top: 5%;
 `

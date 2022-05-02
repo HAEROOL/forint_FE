@@ -16,6 +16,7 @@ import Header from './component/Public/Header';
 import { useDispatch } from 'react-redux';
 import { setRefreshOnHeader } from './api/logined';
 import { refresh } from './store/auth';
+import './App.css';
 
 function App() {
   const dispatch = useDispatch()
