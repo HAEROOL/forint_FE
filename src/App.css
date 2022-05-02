@@ -1,0 +1,18 @@
+/* @font-face{
+    font-family: Noto Sans KR;
+    src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap') format('woff');
+    font-weight: 500;
+} */
+
+
+/* @font-face {
+    font-family: SueEllenFrancisco;
+    src: url('../public/asset/font/SueEllenFrancisco-Regular.ttf');
+    font-weight: 500;
+} */
+
+@font-face {
+    font-family: 'SueEllenFrancisco';
+    src: url('https://fonts.googleapis.com/css2?family=Sue+Ellen+Francisco&display=swap') format('otf');
+    font-weight: 500;
+}

@@ -8,7 +8,8 @@ const HeaderWrapper = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
-    font-family: NotoSansKR;
+    font-family: Noto Sans KR;
+    font-weight: 500;
     margin-bottom: 60px;
 `
 const LogoWrapper = styled(Link)`
@@ -21,6 +22,8 @@ const LogoWrapper = styled(Link)`
 const Logo = styled.div`
     font-size: 55px;
     font-family: SueEllenFrancisco;
+    font-weight: 500;
+    font-display: swap;
 `
 const HeaderMenuList = styled.div`
     display: flex;
