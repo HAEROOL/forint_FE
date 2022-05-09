@@ -7,12 +7,13 @@ import * as authAPI from '../api/auth';
 
 const [LOGIN, LOGIN_SUCESS, LOGIN_FAILURE] = createRequestSagaActionTypes('auth/LOGIN');
 const [REFRESH, REFRESH_SUCESS, REFRESH_FAILURE] = createRequestSagaActionTypes('auth/REFRESH');
-
+const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestSagaActionTypes('auth/REGISTER')
 export const login = createAction(LOGIN, ({ account, password }) => ({
   account,
   password,
 }));
 export const refresh = createAction(REFRESH);
+export const register = createAction(REGISTER)
 
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
@@ -22,10 +23,14 @@ const refreshSaga = createRequestSaga(REFRESH, authAPI.refresh);
 export function* refreshLoginSaga() {
   yield takeLatest(REFRESH, refreshSaga);
 }
-
+const registerSaga = createRequestSaga(REGISTER, authAPI.register);
+export function* registerUserSaga(){
+  yield takeLatest(REGISTER, registerSaga)
+}
 const initialState = {
   isLoggedIn: false,
   authError: null,
+  isRegister: false
 };
 
 const auth = handleActions(
@@ -43,6 +48,7 @@ const auth = handleActions(
       ...state,
       authError: error,
     }),
+
     [REFRESH_SUCESS]: (state, { payload: token }) => ({
       ...state,
       authError: null,
@@ -56,6 +62,16 @@ const auth = handleActions(
       ...state,
       authError: error,
     }),
+
+    [REGISTER_SUCCESS]:(state) => ({
+      ...state,
+      isRegister: true
+    }),
+    [REGISTER_FAILURE]: (state) => ({
+      ...state,
+      isRegister: false
+    })
+
   },
   initialState
 );
