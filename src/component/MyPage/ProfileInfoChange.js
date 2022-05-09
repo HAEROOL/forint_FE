@@ -10,7 +10,6 @@ const ProfileInfoChange = ({infoname, content}) => {
                 setState('CHANGE')
                 break;
             case 'CHANGE':
-                setState('READ')
                 setInfo(changeInfo.current.value)
                 break;
             default:
@@ -20,8 +19,12 @@ const ProfileInfoChange = ({infoname, content}) => {
 
     useEffect(() => {
         if(info !== content){
-            alert('변경되었습니다')
-            console.log(info)
+            if(info.length > 1){
+                alert('변경되었습니다')
+                setState('READ')
+                console.log(info)
+            }else{alert('길이가 너무 짧아요')}
+           
             //dispatch
         }
     },[info, content])
@@ -29,7 +32,9 @@ const ProfileInfoChange = ({infoname, content}) => {
     <S.ProfileContent>
         <S.Content>
             <S.ProfileLabel>{infoname}</S.ProfileLabel>
-            <S.ChangeBtn onClick={()=>onClickChange()}>{infoState==='READ'?'변경':'완료'}</S.ChangeBtn>
+            {infoname==='PASSWORD'?
+             <S.ChangeBtn onClick={()=>onClickChange()}>{infoState==='READ'?'변경':'완료'}</S.ChangeBtn>
+            :null}
         </S.Content>
         {infoState==='READ'?
             (content?<S.LabelContent>{info}</S.LabelContent>:null)
