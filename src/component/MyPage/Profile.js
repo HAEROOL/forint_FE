@@ -11,11 +11,6 @@ const dummy = {
 const Profile = () => {
     return(
         <S.ProfilePannel>
-            <S.ProfileImagePannel>
-                <S.ProfileImage/>
-                <S.ChangeBtn>변경</S.ChangeBtn>
-            </S.ProfileImagePannel>
-            
             <S.ProfileContent>
                 <S.Content>
                     <S.ProfileLabel>EMAIL</S.ProfileLabel>
