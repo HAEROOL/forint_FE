@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import styled from "styled-components";
 import { Routes, Route } from 'react-router';
 import FontMakePage from './page/FontMakePage';
 import LoginPage from './page/LoginPage';
@@ -18,6 +19,10 @@ import { setRefreshOnHeader } from './api/logined';
 import { refresh } from './store/auth';
 import './App.css';
 
+const StyledContatiner = styled.div`
+font-family: Noto Sans KR;
+    font-weight: 500;
+    `
 function App() {
   const dispatch = useDispatch()
 
@@ -27,7 +32,7 @@ function App() {
   },[]);
   
   return (
-    <>
+    <StyledContatiner>
     <Header/>
     <Routes>
     <Route path='/' element={<MainPage/>}/>
@@ -44,7 +49,7 @@ function App() {
     </Route>
     <Route path='/mypage' element={<MyPage/>}/>
   </Routes>
-  </>
+  </StyledContatiner>
     
   );
 }
