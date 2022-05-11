@@ -7,9 +7,6 @@ import Header from "../component/Public/Header";
 
 
 const PageWrapper = styled.div`
-    width: 100%;
-    // height: 937px;
-    background: #000;
 `
 
 const PageContent = styled.div`
@@ -17,7 +14,6 @@ const PageContent = styled.div`
 const LookOutPage = () => {
     return(
         <PageWrapper>
-            <Header/>
             <PageContent>
                 <SearcHeader/>
             </PageContent>
