@@ -5,13 +5,7 @@ const DisplayWrapper = styled.div`
     height: 340px;
     position: relative;
     margin: 0 7px 30px 7px;
-    @font-face {
-        font-family: 'Ubuntu';
-        font-style: normal;
-        font-weight: 400;
-        font-display: block;
-        src: url(https://fonts.gstatic.com/l/font?kit=4iCs6KVjbNBYlgo6fRzll2CmVuUF5-hvgDxg32eKctQUSyiDGQ&skey=7e59fc036a1a8481&v=v20) format('woff2');
-      }
+    
 `
 
 const AnimationWrapper = styled.div`
@@ -35,6 +29,7 @@ const FontTitle = styled.div`
     color: #fff;
     overflow: visible;
     margin-bottom: 14px;
+    
 `
 const FontPannel = styled.div`
     height: 212px;
@@ -42,9 +37,6 @@ const FontPannel = styled.div`
     background: #fff;
     font-size: 30px;
     text-align: center;
-    font-family: 'Ubuntu';
-    font-style: normal;
-    font-weight: 400;
     &:after{
         content: "";
         display: block;
@@ -53,7 +45,16 @@ const FontPannel = styled.div`
         margin: 0 auto;
         margin-top: 153px;
     }
-    
+    @font-face{
+        font-family: ${props => props.fontsrc.fontFamily};
+        font-sltyle: ${props => props.fontsrc.fontStyle};
+        font-weight: ${props => props.fontsrc.fontStyle};
+        font-display: swap format('woff2');
+        src: url(${props => props.fontsrc.src}) ;
+    }
+    font-family: '${props => props.fontsrc.fontFamily}';
+    font-style: normal;
+    font-weight: 400;
 `
 const DetailContainer = styled.div`
     display: flex;
@@ -87,11 +88,20 @@ const DownloadBtn = styled.div`
 
 
 const FontDisplay = ({data}) => {
+    const dummyFont = {
+        fontFamily: data.title,
+        fontStyle: 'normal',
+        fontWeight: 400,
+        fontDisplay: 'block',
+        src: data.src
+    }
+
+    
     return(
         <DisplayWrapper>
             <AnimationWrapper>
             <FontTitle>{data.title}</FontTitle>
-            <FontPannel>This is your font, guys.</FontPannel>
+            <FontPannel fontsrc={dummyFont}>가나다마바사</FontPannel>
             <DetailContainer>
                 <GoodBtn>
                     <Icon src="/asset/image/HeartIcon.svg"/>

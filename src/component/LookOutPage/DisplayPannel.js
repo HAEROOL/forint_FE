@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import FontDisplay from "./FontDisplay";
-
+import { DummyData } from "./dummyData";
 const Pannel = styled.div`
     width: 90%;
     padding: 10px 20px;
@@ -16,10 +16,7 @@ const RowPannel = styled.div`
     flex-wrap: wrap;
     align-items: center;
 `
-const DummyData = new Array(12).fill({
-    title: "테스트용폰트이름",
-    like: 537
-});
+
 const DisplayPannel = () => {
     return(
         <Pannel>
