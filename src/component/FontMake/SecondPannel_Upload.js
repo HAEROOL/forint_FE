@@ -25,7 +25,7 @@ const SecondPannel = () => {
                 </S.DownloadBtnPannel>
                 <S.StepPannel>
                 <S.PrevBtn to='/fontcreate'>PREV</S.PrevBtn>
-                <S.NextBtn to='/fontcreate/third'>NEXT</S.NextBtn>
+                <S.NextBtn to='/fontcreate/fourth'>NEXT</S.NextBtn>
                 </S.StepPannel>
             </S.Pannel>
         </S.Container>
