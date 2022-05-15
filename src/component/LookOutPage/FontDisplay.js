@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 const DisplayWrapper = styled.div`
     width: 400px;
@@ -26,7 +26,7 @@ const AnimationWrapper = styled.div`
 `
 const FontTitle = styled.div`
     font-size: 15px;
-    color: #fff;
+    color: #ddd;
     overflow: visible;
     margin-bottom: 14px;
     
@@ -88,6 +88,7 @@ const DownloadBtn = styled.div`
 
 
 const FontDisplay = ({data}) => {
+    const [likeRate, setRate] = useState(data.like)
     const dummyFont = {
         fontFamily: data.title,
         fontStyle: 'normal',
@@ -96,16 +97,17 @@ const FontDisplay = ({data}) => {
         src: data.src
     }
 
-    
+    const clickLikeBtn = () => {
+        setRate(likeRate+1)
+    }
     return(
         <DisplayWrapper>
             <AnimationWrapper>
-            <FontTitle>{data.title}</FontTitle>
-            <FontPannel fontsrc={dummyFont}>가나다마바사</FontPannel>
+            <FontPannel fontsrc={dummyFont}>{data.title}</FontPannel>
             <DetailContainer>
-                <GoodBtn>
+                <GoodBtn onClick={() => clickLikeBtn()}>
                     <Icon src="/asset/image/HeartIcon.svg"/>
-                    <Rate>{data.like}</Rate>
+                    <Rate>{likeRate}</Rate>
                 </GoodBtn>
                 <DownloadBtn>다운로드</DownloadBtn>
             </DetailContainer>
