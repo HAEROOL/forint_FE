@@ -2,12 +2,14 @@ import React from "react";
 import styled from "styled-components";
 
 const SearchheaderWrapper = styled.div`
-    width: 1684px;
     display: flex;
     justify-content: end;
-    border-bottom: 2px solid #707070;
     margin: 0 auto;
-    margin-top: -120px;
+    @font-face {
+        font-family: SueEllenFrancisco;
+        src: url('../public/asset/font/SueEllenFrancisco-Regular.ttf');
+        font-weight: 500;
+    }
 `
 const SearchInput = styled.input`
     width: 242px;
