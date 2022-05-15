@@ -13,6 +13,14 @@ export const UploadBtn = styled.label`
     background: #000;
     margin: 0 auto;
     cursor: pointer;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    transition: all 0.2s;
+    text-decoration-line: none;
+    &:hover{
+        top: 265px;
+        box-shadow: 2px 2px 10px silver;
+    }
 `
 const SecondPannel = () => {
     return (

@@ -30,7 +30,7 @@ export const DownloadBtnPannel = styled.div`
     align-items: center;
     position: relative;
 `
-export const DownloadBtn = styled.div`
+export const DownloadBtn = styled.a`
     width: 172px;
     height: 51px;
     display: flex;
@@ -44,8 +44,9 @@ export const DownloadBtn = styled.div`
     cursor: pointer;
     border-radius: 10px;
     border: 1px solid #ddd;
+    transition: all 0.2s;
+    text-decoration-line: none;
     &:hover{
-        transition: all 0.3s;
         top: 265px;
         box-shadow: 2px 2px 10px silver;
     }
