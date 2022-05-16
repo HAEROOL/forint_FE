@@ -17,18 +17,20 @@ import Header from './component/Public/Header';
 import { useDispatch } from 'react-redux';
 import { setRefreshOnHeader } from './api/logined';
 import { refresh } from './store/auth';
+import { getCookie } from './component/Shared/Cookies';
 import './App.css';
 
 const StyledContatiner = styled.div`
 font-family: Noto Sans KR;
     font-weight: 500;
     `
+
+
 function App() {
   const dispatch = useDispatch()
-
   useEffect(() => {
     setRefreshOnHeader();
-    dispatch(refresh())
+    dispatch(refresh(getCookie('refresh_token')))
   },[]);
   
   return (
