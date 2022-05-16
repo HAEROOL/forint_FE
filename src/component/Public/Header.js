@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { removeCookie } from "../Shared/Cookies";
+import {useNavigate} from 'react-router-dom';
 
 const HeaderWrapper = styled.div`
     width: 100%;
@@ -39,9 +41,27 @@ const Menu = styled(Link)`
     text-decoration: none;
 `
 
+const LogoutBtn = styled.div`
+font-size: 20px;
+    color: black;
+    &:hover{
+        cursor: pointer;
+    }
+
+`
 const Header = () => {
     const location = useLocation();
+    const navigation = useNavigate();
     const {isLoggedIn} = useSelector((state) => state.auth)
+    const [isLog, setLog] = useState(isLoggedIn)
+    const clickLogout = () => {
+        removeCookie('refresh_token')
+        navigation('/')
+        setLog(false)
+    }
+    useEffect(() => {
+        setLog(isLoggedIn)
+    },[isLoggedIn])
     return (
         <HeaderWrapper location={location.pathname==='/'?1:0}>
             <LogoWrapper to='/'>
@@ -50,10 +70,10 @@ const Header = () => {
             <HeaderMenuList>
                 <Menu to='/fontcreate' location={location.pathname==='/'?1:0}>폰트 만들기</Menu>
                 <Menu to='/lookout' location={location.pathname==='/'?1:0}>둘러보기</Menu>
-                {isLoggedIn?
+                {isLog?
                     <>
                     <Menu to='/mypage' location={location.pathname==='/'?1:0}>마이페이지</Menu>
-                    <Menu to='/signup' location={location.pathname==='/'?1:0}>로그아웃</Menu>
+                    <LogoutBtn onClick={() => clickLogout()}>로그아웃</LogoutBtn>
                     </>
                     :
                     <>
