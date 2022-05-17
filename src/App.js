@@ -30,7 +30,10 @@ function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     setRefreshOnHeader();
-    dispatch(refresh(getCookie('refresh_token')))
+    const refreshToken =  getCookie('refresh_token')
+    if(refreshToken){
+      dispatch(refresh(refreshToken))
+    }
   },[]);
   
   return (

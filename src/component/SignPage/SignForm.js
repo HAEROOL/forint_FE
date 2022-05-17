@@ -3,7 +3,7 @@ import styled from "styled-components";
 import * as S from './SignForm.style'
 import * as P from '../Public/FormStyle'
 import { useDispatch } from "react-redux";
-import { register } from "../../store/auth";
+import { register,checkEmail } from "../../store/auth";
 import { useEffect } from "react";
 import { checkEmailRegEx } from "../utils/checkRefExp";
 const SignFormPageWrapper = styled.div`
@@ -88,7 +88,7 @@ const SignForm = () => {
         console.log('계정 중복을 체크합니다.')
         console.log(signInfo.email)
         if(checkEmailRegEx(signInfo.email)){
-            dispatch(register(e.target.email))
+            dispatch(checkEmail(signInfo.email))
             alert('맞는 형식입니다')
         }else{
             alert('이메일 형식에 맞지 않습니다')
@@ -110,17 +110,19 @@ const SignForm = () => {
     // },[isDuplicateResponse])
     
     const submitSignInfo = () => {
-        console.log('회원가입 정보를 넘겨줍니다')
-        if(!(signInfo.email && signInfo.name && signInfo.nickname && signInfo.password)){
-            alert('모두 입력해주세요')
-        }else if(!permitSign.emailDuplicate){
-            alert('중복된 계정입니다. 다른 계정을 사용해주세요')
-        }else if(!permitSign.passwordSame){
-            alert('비밀번호와 비밀번호 확인이 맞지 않습니다')
-        }else{
-            dispatch(register(signInfo))
-            console.log('회원가입을 진행합니다.')
-        }
+        // console.log('회원가입 정보를 넘겨줍니다')
+        // if(!(signInfo.email && signInfo.name && signInfo.nickname && signInfo.password)){
+        //     alert('모두 입력해주세요')
+        // }else if(!permitSign.emailDuplicate){
+        //     alert('중복된 계정입니다. 다른 계정을 사용해주세요')
+        // }else if(!permitSign.passwordSame){
+        //     alert('비밀번호와 비밀번호 확인이 맞지 않습니다')
+        // }else{
+        //     dispatch(register(signInfo))
+        //     console.log('회원가입을 진행합니다.')
+        //     console.log(signInfo)
+        // }
+        dispatch(register(signInfo))
     }
     return(
         <SignFormPageWrapper>

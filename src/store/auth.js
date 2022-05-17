@@ -8,6 +8,7 @@ import * as authAPI from '../api/auth';
 const [LOGIN, LOGIN_SUCESS, LOGIN_FAILURE] = createRequestSagaActionTypes('auth/LOGIN');
 const [REFRESH, REFRESH_SUCESS, REFRESH_FAILURE] = createRequestSagaActionTypes('auth/REFRESH');
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestSagaActionTypes('auth/REGISTER')
+const [CHECKEMAIL,CHECKEMAIL_SUCCESS, CHECKEMAIL_FAILURE] = createRequestSagaActionTypes('auth/CHECKEMAIL')
 const [CHANGEINFO, CHANGEINFO_SUCCESS, CHANGEINFO_FAILURE] = createRequestSagaActionTypes('auth/CHANGEINF')
 
 export const login = createAction(LOGIN, ({ account, password }) => ({
@@ -15,16 +16,11 @@ export const login = createAction(LOGIN, ({ account, password }) => ({
   password,
 }));
 export const refresh = createAction(REFRESH);
-export const register = createAction(REGISTER, ({account, password, nickname, username}) => ({
-  account,
-  password,
-  username,
-  nickname
-}))
+export const register = createAction(REGISTER, (signInfo) => (signInfo))
 export const change = createAction(CHANGEINFO, ({password}) => ({
   password
 }))
-
+export const checkEmail = createAction(CHECKEMAIL, (email) => (email))
 
 
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
@@ -43,12 +39,17 @@ const changeSaga = createRequestSaga(CHANGEINFO, authAPI.fixUserInfo);
 export function* changeUserInfoSaga(){
   yield takeLatest(CHANGEINFO, changeSaga)
 }
+const checkEmailSaga = createRequestSaga(CHECKEMAIL, authAPI.checkEmail)
+export function* checkUserEmailSaga(){
+  yield takeLatest(CHECKEMAIL, checkEmailSaga)
+}
 
 const initialState = {
   isLoggedIn: false,
   authError: null,
   isRegister: false,
-  isChanged: false
+  isChanged: false,
+  isEmailDuplicate: true
 };
 
 const auth = handleActions(
@@ -94,6 +95,15 @@ const auth = handleActions(
     [CHANGEINFO_FAILURE]: (state) => ({
       ...state,
       isChanged: false
+    }),
+
+    [CHECKEMAIL_SUCCESS]: (state) => ({
+      ...state,
+      isEmailDuplicate: state.detail === "You can use this email :)"?false:true
+    }),
+    [CHECKEMAIL_FAILURE]:(state) => ({
+      ...state,
+      isEmailDuplicate: true
     })
 
   },
