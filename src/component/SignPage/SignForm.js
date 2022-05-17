@@ -3,9 +3,11 @@ import styled from "styled-components";
 import * as S from './SignForm.style'
 import * as P from '../Public/FormStyle'
 import { useDispatch } from "react-redux";
-import { register,checkEmail } from "../../store/auth";
+import { register} from "../../store/auth";
 import { useEffect } from "react";
 import { checkEmailRegEx } from "../utils/checkRefExp";
+import { useSelector } from "react-redux";
+import axios from "axios";
 const SignFormPageWrapper = styled.div`
 `
 // api 관련 확인해야 함
@@ -20,7 +22,8 @@ const SignForm = () => {
     })
     const [permitSign, setPermit] = useState({
         passwordSame: false,
-        emailDuplicate: true,
+        emailDuplicate: null,
+        nicknameDuplicate: null
     })
     const onChange = (e) => {
         const name = e.target.name;
@@ -85,29 +88,42 @@ const SignForm = () => {
 
    console.log(signInfo)
     const checkDuplicateEmail = (e) => {
-        console.log('계정 중복을 체크합니다.')
         console.log(signInfo.email)
         if(checkEmailRegEx(signInfo.email)){
-            dispatch(checkEmail(signInfo.email))
-            alert('맞는 형식입니다')
+            axios.post('http://127.0.0.1:8000/users/registration/email-check/',{email:signInfo.email})
+            .then(function(response){
+                setPermit({
+                    ...permitSign,
+                    emailDuplicate: true
+                })
+            })
+            .catch(function(error){
+                setPermit({
+                    ...permitSign,
+                    emailDuplicate: false
+                })
+            })
         }else{
             alert('이메일 형식에 맞지 않습니다')
         }
     }
-    // useEffect(() => {
-    //     if(isDuplicate){
-    //         alert('중복된 계정이 존재합니다')
-            // setPermit({
-            //     ...permitSign,
-            //     emailDuplicate: true
-            // })
-    //     }else{
-            // setPermit({
-            //     ...permitSign,
-            //     emailDuplicate: false
-            // })
-    //     }
-    // },[isDuplicateResponse])
+    const checkDuplicateNickname = (e) => {
+        console.log(signInfo.nickname)
+        axios.post('http://127.0.0.1:8000/users/registration/nickname-check/',{nickname: signInfo.nickname})
+        .then(function(response){
+            setPermit({
+                ...permitSign,
+                nicknameDuplicate: true
+            })
+        })
+        .catch(function(error){
+            setPermit({
+                ...permitSign,
+                nicknameDuplicate: false
+            })
+        })
+    }
+
     
     const submitSignInfo = () => {
         // console.log('회원가입 정보를 넘겨줍니다')
@@ -138,6 +154,7 @@ const SignForm = () => {
                             <S.CheckButton/>
                         </S.CheckBox>
                         {permitSign.emailDuplicate && <S.CheckText>확인되었습니다!</S.CheckText>}
+                        {permitSign.emailDuplicate!==null && !permitSign.emailDuplicate && <S.CheckText>중복된 계정이 존재합니다.</S.CheckText>}
                     </S.CheckboxWrapper>
                     
                 </P.Form>
@@ -156,6 +173,14 @@ const SignForm = () => {
                 <P.Form>
                     <P.FormName>NickName</P.FormName>
                     <P.FormInput onChange={onChange} name='nickname'/>
+                    <S.CheckboxWrapper>
+                        <S.CheckBox onClick={checkDuplicateNickname}>
+                            중복확인
+                            <S.CheckButton/>
+                        </S.CheckBox>
+                        {permitSign.nicknameDuplicate && <S.CheckText>확인되었습니다!</S.CheckText>}
+                        {permitSign.nicknameDuplicate!==null && !permitSign.nicknameDuplicate && <S.CheckText>중복된 닉네임이 존재합니다.</S.CheckText>}
+                    </S.CheckboxWrapper>
                 </P.Form>
             </S.FormWrapper>
             <S.SubmitBtn onClick={() => submitSignInfo()} >회원가입</S.SubmitBtn>

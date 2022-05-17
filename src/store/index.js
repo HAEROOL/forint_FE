@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
 import { all } from 'redux-saga/effects';
-import auth, { authSaga, checkUserEmailSaga, refreshLoginSaga, registerUserSaga } from './auth';
+import auth, { authSaga, checkUserEmailSaga, checkUserNicknameSaga, refreshLoginSaga, registerUserSaga } from './auth';
 import loading from './loading';
 
 const rootReducer = combineReducers({
-  auth,
   loading,
+  auth,
 });
 
 export function* rootSaga() {
@@ -13,7 +13,8 @@ export function* rootSaga() {
     authSaga(),
     refreshLoginSaga(),
     registerUserSaga(),
-    checkUserEmailSaga()
+    checkUserEmailSaga(),
+    checkUserNicknameSaga()
   ]);
 }
 

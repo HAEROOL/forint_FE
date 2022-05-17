@@ -10,9 +10,11 @@ axios.post('http://127.0.0.1:8000/users/registration/', {
     Nickname: signInfo.nickname,
     profile_image: null
 })
-export const checkEmail = (email) => {
-    console.log(email,'asdfasdf')
-    axios.post('http://127.0.0.1:8000/users/registration/email-check/',{email})
+export const checkEmail = ({email}) => {
+    axios.post('http://127.0.0.1:8000/users/registration/email-check/',{email: email})
+}
+export const checkNickname = ({nickname}) => {
+    axios.post('http://127.0.0.1:8000/users/registration/nickname-check/',{nickname: nickname})
 }
 export const refresh = (token) => logined.post('users/token/refresh/',{refresh:token});
 export const fixUserInfo = ({password}) => logined.post('user/fix', {password:password});

@@ -5,11 +5,12 @@ import { setCookie } from '../component/Shared/Cookies';
 import { setAccessTokenOnHeader } from '../api/logined';
 import * as authAPI from '../api/auth';
 
-const [LOGIN, LOGIN_SUCESS, LOGIN_FAILURE] = createRequestSagaActionTypes('auth/LOGIN');
-const [REFRESH, REFRESH_SUCESS, REFRESH_FAILURE] = createRequestSagaActionTypes('auth/REFRESH');
+const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestSagaActionTypes('auth/LOGIN');
+const [REFRESH, REFRESH_SUCCESS, REFRESH_FAILURE] = createRequestSagaActionTypes('auth/REFRESH');
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestSagaActionTypes('auth/REGISTER')
 const [CHECKEMAIL,CHECKEMAIL_SUCCESS, CHECKEMAIL_FAILURE] = createRequestSagaActionTypes('auth/CHECKEMAIL')
-const [CHANGEINFO, CHANGEINFO_SUCCESS, CHANGEINFO_FAILURE] = createRequestSagaActionTypes('auth/CHANGEINF')
+const [CHECKNICKNAME,CHECKNICKNAME_SUCCESS, CHECKNICKNAME_FAILURE] = createRequestSagaActionTypes('auth/CHECKNICKNAME')
+const [CHANGEINFO, CHANGEINFO_SUCCESS, CHANGEINFO_FAILURE] = createRequestSagaActionTypes('auth/CHANGEINFO')
 
 export const login = createAction(LOGIN, ({ account, password }) => ({
   account,
@@ -20,8 +21,8 @@ export const register = createAction(REGISTER, (signInfo) => (signInfo))
 export const change = createAction(CHANGEINFO, ({password}) => ({
   password
 }))
-export const checkEmail = createAction(CHECKEMAIL, (email) => (email))
-
+export const checkEmail = createAction(CHECKEMAIL, ({email}) => ({email}))
+export const checkNickname = createAction(CHECKNICKNAME, ({nickname}) => ({nickname}))
 
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
@@ -43,18 +44,23 @@ const checkEmailSaga = createRequestSaga(CHECKEMAIL, authAPI.checkEmail)
 export function* checkUserEmailSaga(){
   yield takeLatest(CHECKEMAIL, checkEmailSaga)
 }
+const checkNicknameSaga = createRequestSaga(CHECKNICKNAME, authAPI.checkNickname)
+export function* checkUserNicknameSaga(){
+  yield takeLatest(CHECKNICKNAME, checkNicknameSaga)
+}
 
 const initialState = {
   isLoggedIn: false,
   authError: null,
   isRegister: false,
   isChanged: false,
-  isEmailDuplicate: true
+  isEmailDuplicate: null,
+  isNicknameDuplicate: null
 };
 
 const auth = handleActions(
   {
-    [LOGIN_SUCESS]: (state, { payload: token }) => ({
+    [LOGIN_SUCCESS]: (state, { payload: token }) => ({
       ...state,
       authError: null,
       token: setCookie('refresh_token', `${token.refresh_token}`, {
@@ -68,7 +74,7 @@ const auth = handleActions(
       authError: error,
     }),
 
-    [REFRESH_SUCESS]: (state, { payload: token }) => ({
+    [REFRESH_SUCCESS]: (state, { payload: token }) => ({
       ...state,
       authError: null,
       accessToken: setAccessTokenOnHeader(token.access_token),
@@ -97,14 +103,22 @@ const auth = handleActions(
       isChanged: false
     }),
 
-    [CHECKEMAIL_SUCCESS]: (state) => ({
+    [CHECKEMAIL_SUCCESS]: (state, payload) => ({
       ...state,
-      isEmailDuplicate: state.detail === "You can use this email :)"?false:true
+      isEmailDuplicate: payload.detail === "You can use this email :)"?false:true
     }),
     [CHECKEMAIL_FAILURE]:(state) => ({
+      ...state
+    }),
+
+    [CHECKNICKNAME_SUCCESS]: (state, payload) => ({
       ...state,
-      isEmailDuplicate: true
+      isNicknameDuplicate: payload.detail === "You can use this email :)"?false:true
+    }),
+    [CHECKNICKNAME_FAILURE]:(state) => ({
+      ...state
     })
+
 
   },
   initialState
