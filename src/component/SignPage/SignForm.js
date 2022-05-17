@@ -8,11 +8,13 @@ import { useEffect } from "react";
 import { checkEmailRegEx } from "../utils/checkRefExp";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router";
 const SignFormPageWrapper = styled.div`
 `
 // api 관련 확인해야 함
 const SignForm = () => {
     const dispatch = useDispatch()
+    const navigation = useNavigate()
     const pwdRef = useRef()
     const [signInfo,setInfo] = useState({
         name:null,
@@ -138,7 +140,22 @@ const SignForm = () => {
         //     console.log('회원가입을 진행합니다.')
         //     console.log(signInfo)
         // }
-        dispatch(register(signInfo))
+        // dispatch(register(signInfo))
+        axios.post('http://127.0.0.1:8000/users/registration/',{
+            username: signInfo.name,
+            email: signInfo.email,
+            password1: signInfo.password,
+            password2: signInfo.password,
+            nickname: signInfo.nickname,
+            profile_image: null
+        }).then(function(response){
+            alert('회원가입 성공!')
+            navigation('/')
+        })
+        .catch(function(error){
+            alert('실패했습니다. 다시 시도해주세요')
+        })
+        console.log(signInfo)
     }
     return(
         <SignFormPageWrapper>
