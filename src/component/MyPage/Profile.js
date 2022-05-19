@@ -12,7 +12,8 @@ const Profile = () => {
         email: '',
         nickname: '',
         password: null,
-        name: ''
+        name: '',
+        fonts: []
     })
     const userAccount = localStorage.getItem('userAccount')
     const dispatch = useDispatch()
@@ -35,7 +36,7 @@ const Profile = () => {
             <ProfileInfoNotChange infoname={'NAME'} content={userInfo.name}/>
             <ProfileInfoNotChange infoname={'NICKNAME'} content={userInfo.nickname}/>
             <ProfileInfoChange infoname={'PASSWORD'} content={null}/>
-            <S.MyFontPannel>당신의 글씨체를 담아드립니다.</S.MyFontPannel>
+            <S.MyFontPannel>{userInfo.fonts.length>0?'당신의 글씨체를 담아드립니다.':'아직 폰트를 생성하지 않았습니다'}</S.MyFontPannel>
         </S.ProfilePannel>
     )
 }
