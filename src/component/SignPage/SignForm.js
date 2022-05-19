@@ -88,9 +88,7 @@ const SignForm = () => {
     }
 
 
-   console.log(signInfo)
     const checkDuplicateEmail = (e) => {
-        console.log(signInfo.email)
         if(checkEmailRegEx(signInfo.email)){
             axios.post('http://127.0.0.1:8000/users/registration/email-check/',{email:signInfo.email})
             .then(function(response){
@@ -155,7 +153,6 @@ const SignForm = () => {
         .catch(function(error){
             alert('실패했습니다. 다시 시도해주세요')
         })
-        console.log(signInfo)
     }
     return(
         <SignFormPageWrapper>

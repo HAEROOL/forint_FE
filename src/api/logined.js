@@ -13,7 +13,6 @@ export const setRefreshOnHeader = () => {
 };
 
 export const setAccessTokenOnHeader = (token) => {
-  console.log(token, 'asdf')
   logined.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 

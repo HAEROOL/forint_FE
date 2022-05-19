@@ -22,7 +22,6 @@ const Profile = () => {
         // dispatch(getUserInfo({email:'admin@admin.com'}))
         logined.get(`users/${userAccount}/`)
         .then((response) => {
-            console.log(response)
             setInfo({
                 ...userInfo,
                 ...response.data

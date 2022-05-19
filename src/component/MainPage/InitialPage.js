@@ -120,7 +120,6 @@ const InitialPage = () =>{
         }
         
     }
-    console.log(number)
     return (
         <ContentPanel>
             <LeftElement>
