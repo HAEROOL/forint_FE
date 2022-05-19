@@ -4,11 +4,7 @@ import { getCookie } from '../component/Shared/Cookies';
 
 const check = getCookie('refresh_token');
 
-const logined = axios.create({
-  headers:{
-    
-  }
-});
+const logined = axios.create({});
 
 logined.defaults.baseURL = 'http://127.0.0.1:8000/';
 
@@ -17,6 +13,7 @@ export const setRefreshOnHeader = () => {
 };
 
 export const setAccessTokenOnHeader = (token) => {
+  console.log(token, 'asdf')
   logined.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 };
 

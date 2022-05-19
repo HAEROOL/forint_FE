@@ -11,6 +11,7 @@ const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestSagaActionTy
 const [CHECKEMAIL,CHECKEMAIL_SUCCESS, CHECKEMAIL_FAILURE] = createRequestSagaActionTypes('auth/CHECKEMAIL')
 const [CHECKNICKNAME,CHECKNICKNAME_SUCCESS, CHECKNICKNAME_FAILURE] = createRequestSagaActionTypes('auth/CHECKNICKNAME')
 const [CHANGEINFO, CHANGEINFO_SUCCESS, CHANGEINFO_FAILURE] = createRequestSagaActionTypes('auth/CHANGEINFO')
+const [GETINFO, GETINFO_SUCCESS, GETINFO_FAILURE] = createRequestSagaActionTypes('auth/GETINFO')
 
 export const login = createAction(LOGIN, ({ account, password }) => ({
   account,
@@ -23,6 +24,7 @@ export const change = createAction(CHANGEINFO, ({password}) => ({
 }))
 export const checkEmail = createAction(CHECKEMAIL, ({email}) => ({email}))
 export const checkNickname = createAction(CHECKNICKNAME, ({nickname}) => ({nickname}))
+export const getUserInfo = createAction(GETINFO, ({email}) => (email))
 
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
@@ -48,6 +50,10 @@ const checkNicknameSaga = createRequestSaga(CHECKNICKNAME, authAPI.checkNickname
 export function* checkUserNicknameSaga(){
   yield takeLatest(CHECKNICKNAME, checkNicknameSaga)
 }
+const getInfoSaga = createRequestSaga(GETINFO, authAPI.getUserInfo)
+export function* getUserInfoSaga(){
+  yield takeLatest(GETINFO, getInfoSaga)
+}
 
 const initialState = {
   isLoggedIn: false,
@@ -55,7 +61,8 @@ const initialState = {
   isRegister: false,
   isChanged: false,
   isEmailDuplicate: null,
-  isNicknameDuplicate: null
+  isNicknameDuplicate: null,
+  userInfo: null
 };
 
 const auth = handleActions(
@@ -77,7 +84,7 @@ const auth = handleActions(
     [REFRESH_SUCCESS]: (state, { payload: token }) => ({
       ...state,
       authError: null,
-      accessToken: setAccessTokenOnHeader(token.access_token),
+      accessToken: setAccessTokenOnHeader(token.access),
       isLoggedIn: true,
     }),
     [REFRESH_FAILURE]: (state, { payload: error }) => ({
@@ -117,6 +124,15 @@ const auth = handleActions(
     }),
     [CHECKNICKNAME_FAILURE]:(state) => ({
       ...state
+    }),
+
+    [GETINFO_SUCCESS]: (state, payload) => ({
+      ...state,
+      userInfo: payload.body
+    }),
+    [GETINFO_FAILURE]:(state) => ({
+      ...state,
+      userInfo: null
     })
 
 

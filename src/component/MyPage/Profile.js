@@ -1,24 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import * as S from './Profile.Style'
 import ProfileInfoChange from "./ProfileInfoChange";
-const dummy = {
-    account: 'test@testID.com',
-    nickname: 'dummyNick',
-    name: 'dummyname'
-}
+import ProfileInfoNotChange from "./PrifileInfoNotChange";
+import { useDispatch } from "react-redux";
+import logined from "../../api/logined";
 
 
 const Profile = () => {
+    const [userInfo, setInfo] = useState({
+        email: '',
+        nickname: '',
+        password: null,
+        name: ''
+    })
+    const dispatch = useDispatch()
+    
+    useLayoutEffect(() => {
+        // dispatch(getUserInfo({email:'admin@admin.com'}))
+        logined.get(`users/${'admin@admin.com'}/`)
+        .then((response) => {
+            console.log(response)
+            setInfo({
+                ...userInfo,
+                ...response.data
+            })
+        })
+    },[])
+
     return(
         <S.ProfilePannel>
-            <S.ProfileContent>
-                <S.Content>
-                    <S.ProfileLabel>EMAIL</S.ProfileLabel>
-                </S.Content>
-                <S.LabelContent>{dummy.account}</S.LabelContent>
-            </S.ProfileContent>
-            <ProfileInfoChange infoname={'NAME'} content={dummy.name}/>
-            <ProfileInfoChange infoname={'NICKNAME'} content={dummy.nickname}/>
+            <ProfileInfoNotChange infoname={'EMAIL'} content={userInfo.email}/>
+            <ProfileInfoNotChange infoname={'NAME'} content={userInfo.name}/>
+            <ProfileInfoNotChange infoname={'NICKNAME'} content={userInfo.nickname}/>
             <ProfileInfoChange infoname={'PASSWORD'} content={null}/>
             <S.MyFontPannel>당신의 글씨체를 담아드립니다.</S.MyFontPannel>
         </S.ProfilePannel>

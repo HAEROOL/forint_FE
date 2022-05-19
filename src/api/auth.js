@@ -17,4 +17,6 @@ export const checkNickname = ({nickname}) => {
     axios.post('http://127.0.0.1:8000/users/registration/nickname-check/',{nickname: nickname})
 }
 export const refresh = (token) => logined.post('users/token/refresh/',{refresh:token});
+export const getUserInfo = (email) => {
+    logined.get(`users/${email}/`)};
 export const fixUserInfo = ({password}) => logined.post('user/fix', {password:password});
