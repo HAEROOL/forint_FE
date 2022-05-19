@@ -3,17 +3,18 @@ import createRequestSaga, { createRequestSagaActionTypes } from './createRequest
 import { takeLatest } from '@redux-saga/core/effects';
 import * as authAPI from '../api/auth';
 
-const [CHECKEMAIL,CHECKEMAIL_SUCCESS, CHECKEMAIL_FAILURE] = createRequestSagaActionTypes('auth/CHECKEMAIL')
-const [CHECKNICKNAME,CHECKNICKNAME_SUCCESS, CHECKNICKNAME_FAILURE] = createRequestSagaActionTypes('auth/CHECKNICKNAME')
-const [CHANGEINFO, CHANGEINFO_SUCCESS, CHANGEINFO_FAILURE] = createRequestSagaActionTypes('auth/CHANGEINFO')
-const [GETINFO, GETINFO_SUCCESS, GETINFO_FAILURE] = createRequestSagaActionTypes('auth/GETINFO')
-
+const [CHECKEMAIL,CHECKEMAIL_SUCCESS, CHECKEMAIL_FAILURE] = createRequestSagaActionTypes('user/CHECKEMAIL')
+const [CHECKNICKNAME,CHECKNICKNAME_SUCCESS, CHECKNICKNAME_FAILURE] = createRequestSagaActionTypes('user/CHECKNICKNAME')
+const [CHANGEINFO, CHANGEINFO_SUCCESS, CHANGEINFO_FAILURE] = createRequestSagaActionTypes('user/CHANGEINFO')
+const [GETINFO, GETINFO_SUCCESS, GETINFO_FAILURE] = createRequestSagaActionTypes('user/GETINFO')
+const SETACCOUNT = 'user/SETACCOUNT'
 export const change = createAction(CHANGEINFO, ({password}) => ({
     password
   }))
 export const checkEmail = createAction(CHECKEMAIL, ({email}) => ({email}))
 export const checkNickname = createAction(CHECKNICKNAME, ({nickname}) => ({nickname}))
 export const getUserInfo = createAction(GETINFO, ({email}) => (email))
+export const userAccount = createAction(SETACCOUNT,(email) => ({email: email}))
 
 const changeSaga = createRequestSaga(CHANGEINFO, authAPI.fixUserInfo);
 export function* changeUserInfoSaga(){
@@ -36,7 +37,8 @@ const initialState = {
     isChanged: false,
     isEmailDuplicate: null,
     isNicknameDuplicate: null,
-    userInfo: null
+    userInfo: null,
+    userAccount: ''
 };
 
 const user = handleActions(
@@ -73,6 +75,11 @@ const user = handleActions(
           [GETINFO_FAILURE]:(state) => ({
             ...state,
             userInfo: null
+          }),
+
+          [SETACCOUNT]: (state, payload) => ({
+            ...state,
+            userAccount: localStorage.setItem('userAccount',payload.payload.email)
           })
     },
     initialState

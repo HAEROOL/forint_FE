@@ -5,6 +5,7 @@ import styled from "styled-components";
 import auth, { login } from "../../store/auth";
 import {useNavigate} from 'react-router-dom';
 import * as S from './LoginForm.style';
+import { userAccount } from "../../store/user";
 
 const PageWrapper = styled.div`
 `
@@ -18,6 +19,7 @@ const LoginForm = () => {
     })
     useEffect(() => {
         if(isLoggedIn){
+            dispatch(userAccount(loginInfo.account))
             navigation('/')
         }
     },[isLoggedIn])
@@ -41,7 +43,6 @@ const LoginForm = () => {
         }
     }
     const clickLogin = () => {
-        console.log(loginInfo.account,loginInfo.password)
         dispatch(login({
             account:loginInfo.account,
             password:loginInfo.password}

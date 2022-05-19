@@ -58,6 +58,7 @@ const Header = () => {
         removeCookie('refresh_token')
         navigation('/')
         setLog(false)
+        localStorage.removeItem('userAccount')
     }
     useEffect(() => {
         setLog(isLoggedIn)

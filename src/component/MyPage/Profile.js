@@ -4,6 +4,7 @@ import ProfileInfoChange from "./ProfileInfoChange";
 import ProfileInfoNotChange from "./PrifileInfoNotChange";
 import { useDispatch } from "react-redux";
 import logined from "../../api/logined";
+import { useSelector } from "react-redux";
 
 
 const Profile = () => {
@@ -13,11 +14,12 @@ const Profile = () => {
         password: null,
         name: ''
     })
+    const userAccount = localStorage.getItem('userAccount')
     const dispatch = useDispatch()
     
     useLayoutEffect(() => {
         // dispatch(getUserInfo({email:'admin@admin.com'}))
-        logined.get(`users/${'admin@admin.com'}/`)
+        logined.get(`users/${userAccount}/`)
         .then((response) => {
             console.log(response)
             setInfo({
