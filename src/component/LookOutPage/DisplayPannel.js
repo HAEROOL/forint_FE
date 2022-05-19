@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import FontDisplay from "./FontDisplay";
 import { DummyData } from "./dummyData";
@@ -19,15 +19,21 @@ const RowPannel = styled.div`
 `
 
 const DisplayPannel = () => {
-    // useEffect(() => {
-    //     axios.get
-    // },[])
+    const [fontDataArray, setArray] = useState([])
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/fonts/')
+        .then((response) => {
+            setArray(response.data)
+        })
+    },[])
     return(
         <Pannel>
             <RowPannel>
-            {DummyData.map((data,index) => (
+            {fontDataArray.length > 0?fontDataArray.map((data,index) => (
                 <FontDisplay key={index} data={data}/>
-            ))}
+            )):
+            <div>아직 등록된 폰트가 없습니다</div>
+            }
             </RowPannel>
             
         </Pannel>

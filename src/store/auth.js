@@ -12,6 +12,7 @@ const [CHECKEMAIL,CHECKEMAIL_SUCCESS, CHECKEMAIL_FAILURE] = createRequestSagaAct
 const [CHECKNICKNAME,CHECKNICKNAME_SUCCESS, CHECKNICKNAME_FAILURE] = createRequestSagaActionTypes('auth/CHECKNICKNAME')
 const [CHANGEINFO, CHANGEINFO_SUCCESS, CHANGEINFO_FAILURE] = createRequestSagaActionTypes('auth/CHANGEINFO')
 const [GETINFO, GETINFO_SUCCESS, GETINFO_FAILURE] = createRequestSagaActionTypes('auth/GETINFO')
+const LOGOUT = 'auth/LOGOUT'
 
 export const login = createAction(LOGIN, ({ account, password }) => ({
   account,
@@ -25,6 +26,7 @@ export const change = createAction(CHANGEINFO, ({password}) => ({
 export const checkEmail = createAction(CHECKEMAIL, ({email}) => ({email}))
 export const checkNickname = createAction(CHECKNICKNAME, ({nickname}) => ({nickname}))
 export const getUserInfo = createAction(GETINFO, ({email}) => (email))
+export const logout = createAction(LOGOUT)
 
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 export function* authSaga() {
@@ -133,6 +135,11 @@ const auth = handleActions(
     [GETINFO_FAILURE]:(state) => ({
       ...state,
       userInfo: null
+    }),
+
+    [LOGOUT]: (state) => ({
+      ...state,
+      isLoggedIn: false
     })
 
 

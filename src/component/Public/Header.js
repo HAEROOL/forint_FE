@@ -5,6 +5,9 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { removeCookie } from "../Shared/Cookies";
 import {useNavigate} from 'react-router-dom';
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/auth";
 
 const HeaderWrapper = styled.div`
     width: 100%;
@@ -52,6 +55,7 @@ font-size: 20px;
 const Header = () => {
     const location = useLocation();
     const navigation = useNavigate();
+    const dispatch = useDispatch()
     const {isLoggedIn} = useSelector((state) => state.auth)
     const [isLog, setLog] = useState(isLoggedIn)
     const clickLogout = () => {
@@ -59,6 +63,7 @@ const Header = () => {
         navigation('/')
         setLog(false)
         localStorage.removeItem('userAccount')
+        dispatch(logout())
     }
     useEffect(() => {
         setLog(isLoggedIn)
