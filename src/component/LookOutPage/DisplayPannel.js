@@ -29,7 +29,7 @@ const DisplayPannel = () => {
     return(
         <Pannel>
             <RowPannel>
-            {fontDataArray.length > 0?fontDataArray.map((data,index) => (
+            {DummyData.length > 0?DummyData.map((data,index) => (
                 <FontDisplay key={index} data={data}/>
             )):
             <div>아직 등록된 폰트가 없습니다</div>

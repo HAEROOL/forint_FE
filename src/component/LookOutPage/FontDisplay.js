@@ -61,6 +61,9 @@ const DetailContainer = styled.div`
     width: 90%;
     margin: 0 auto;
     justify-content: space-between;
+    &:hover{
+        cursor: pointer;
+    }
 `
 const GoodBtn = styled.div`
     display: flex;
@@ -89,6 +92,7 @@ const DownloadBtn = styled.div`
 
 const FontDisplay = ({data}) => {
     const [likeRate, setRate] = useState(data.like)
+    const [isLiked, setLike] = useState(false)
     const dummyFont = {
         fontFamily: data.title,
         fontStyle: 'normal',
@@ -98,7 +102,14 @@ const FontDisplay = ({data}) => {
     }
 
     const clickLikeBtn = () => {
-        setRate(likeRate+1)
+        if(!isLiked){
+            setRate(likeRate+1)
+            setLike(true)
+        }else{
+            setRate(likeRate-1)
+            setLike(false)
+        }
+        
     }
     return(
         <DisplayWrapper>
@@ -106,7 +117,7 @@ const FontDisplay = ({data}) => {
             <FontPannel fontsrc={dummyFont}>{data.title}</FontPannel>
             <DetailContainer>
                 <GoodBtn onClick={() => clickLikeBtn()}>
-                    <Icon src="/asset/image/HeartIcon.svg"/>
+                    {isLiked?<Icon src="/asset/image/HeartIcon_FILL.svg"/>:<Icon src="/asset/image/HeartIcon.svg"/>}
                     <Rate>{likeRate}</Rate>
                 </GoodBtn>
                 <DownloadBtn>다운로드</DownloadBtn>
