@@ -47,12 +47,12 @@ const FontPannel = styled.div`
     }
     @font-face{
         font-family: ${props => props.fontsrc.fontFamily};
-        font-sltyle: ${props => props.fontsrc.fontStyle};
+        font-style: ${props => props.fontsrc.fontStyle};
         font-weight: ${props => props.fontsrc.fontStyle};
         font-display: swap format('woff2');
         src: url(${props => props.fontsrc.src}) ;
     }
-    font-family: '${props => props.fontsrc.fontFamily}';
+    font-family:${props => props.fontsrc.fontFamily};
     font-style: normal;
     font-weight: 400;
 `
@@ -83,7 +83,7 @@ const Rate = styled.span`
     font-weight: 700;
     margin-left: 1px;
 `
-const DownloadBtn = styled.div`
+const DownloadBtn = styled.a`
     padding: 2px 6px;
     border: 2px solid #fff;
     cursor: pointer;
@@ -91,14 +91,15 @@ const DownloadBtn = styled.div`
 
 
 const FontDisplay = ({data}) => {
-    const [likeRate, setRate] = useState(data.like)
+    const [likeRate, setRate] = useState(data.likeRate)
     const [isLiked, setLike] = useState(false)
-    const dummyFont = {
-        fontFamily: data.title,
+    console.log(data)
+    const userFont = {
+        fontFamily: data.fontTitle,
         fontStyle: 'normal',
         fontWeight: 400,
-        fontDisplay: 'block',
-        src: data.src
+        fontDisplay: 'swap',
+        src: data.fontSrc
     }
 
     const clickLikeBtn = () => {
@@ -113,14 +114,17 @@ const FontDisplay = ({data}) => {
     }
     return(
         <DisplayWrapper>
+            <style>
+            @import url({userFont.src});
+            </style>
             <AnimationWrapper>
-            <FontPannel fontsrc={dummyFont}>{data.title}</FontPannel>
+            <FontPannel fontsrc={userFont}>안녕하세요</FontPannel>
             <DetailContainer>
                 <GoodBtn onClick={() => clickLikeBtn()}>
                     {isLiked?<Icon src="/asset/image/HeartIcon_FILL.svg"/>:<Icon src="/asset/image/HeartIcon.svg"/>}
                     <Rate>{likeRate}</Rate>
                 </GoodBtn>
-                <DownloadBtn>다운로드</DownloadBtn>
+                <DownloadBtn src={userFont.src} download={userFont.fontFamily}>다운로드</DownloadBtn>
             </DetailContainer>
             </AnimationWrapper>
         </DisplayWrapper>
