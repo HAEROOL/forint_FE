@@ -18,6 +18,9 @@ const StyledPannel = styled(S.Pannel)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px silver;
 `
 const FourthPannel = () => {
     return (
