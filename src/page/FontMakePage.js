@@ -10,14 +10,10 @@ import ThirdPannel from "../component/FontMake/ThirdPannel_Loading";
 import Header from "../component/Public/Header";
 
 const PageWrapper = styled.div`
-    width: 100vw;
-    height: 937px;
-    background: #000;
 `
 const FontMakePage = () => {
     return(
         <PageWrapper>
-            <Header/>
             <Routes>
                 <Route path="/" element={<FirsrtPannel/>}/>
                 <Route path="/second" element={<SecondPannel/>}/>
