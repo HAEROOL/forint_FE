@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import logined from "../../api/logined";
 import * as S from './Public.style'
 
 export const UploadBtn = styled.label`
@@ -23,13 +24,29 @@ export const UploadBtn = styled.label`
     }
 `
 const SecondPannel = () => {
+    const [img, setImage] = useState(null)
+    const onChange = (e) => {
+        setImage(e.target.files[0])
+        const formData = new FormData();
+        formData.append('file', img)
+        logined.post('',formData)
+        console.log(formData)
+    }
+    const onClick = async() => {
+        const formData = new FormData();
+        formData.append('file', img)
+        // const res = await logined.post('',formData)
+        console.log(formData)
+    }
     return (
         <S.Container>
             <S.CommandText>step 2. 작성한 템플릿을 업로드 해주세요!</S.CommandText>
             <S.Pannel>
                 <S.DownloadBtnPannel>
-                <UploadBtn for='upload-file'>템플릿 업로드</UploadBtn>
-                <input type="file" id="upload-file" style={{display:"none"}}/>
+                <form>
+                <UploadBtn htmlFor='upload-file'>템플릿 업로드</UploadBtn>
+                <input type="file" id="upload-file" onChange={onChange} style={{display:"none"}}/>
+                </form>
                 </S.DownloadBtnPannel>
                 <S.StepPannel>
                 <S.PrevBtn to='/fontcreate'>PREV</S.PrevBtn>
