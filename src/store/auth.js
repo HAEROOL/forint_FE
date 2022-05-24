@@ -80,7 +80,7 @@ const auth = handleActions(
     }),
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
-      authError: error,
+      authError: '아이디 또는 비밀번호가 다릅니다',
     }),
 
     [REFRESH_SUCCESS]: (state, { payload: token }) => ({

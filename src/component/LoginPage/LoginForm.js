@@ -12,7 +12,7 @@ const PageWrapper = styled.div`
 const LoginForm = () => {
     const dispatch = useDispatch();
     const navigation = useNavigate()
-    const {isLoggedIn} = useSelector((state) => state.auth)
+    const {isLoggedIn, authError} = useSelector((state) => state.auth)
     const [loginInfo, setInfo] = useState({
         account: null,
         password: null
@@ -22,7 +22,10 @@ const LoginForm = () => {
             dispatch(userAccount(loginInfo.account))
             navigation('/')
         }
-    },[isLoggedIn])
+        if(authError === '아이디 또는 비밀번호가 다릅니다'){
+            alert('아이디 또는 비밀번호가 다릅니다')
+        }
+    },[isLoggedIn, authError])
     const onChange = (e) => {
         const name = e.target.name;
         switch(name){
