@@ -23,6 +23,16 @@ export const UploadBtn = styled.label`
         box-shadow: 2px 2px 10px silver;
     }
 `
+const FontNameInput = styled.input`
+    width: 216px;
+    height: 48px;
+    border: 1px solid #ddd;
+    text-align: center;
+    font-size: 15px;
+    outline: none;
+    border-radius: 10px;
+    margin: 15px 0 0 0;
+`
 const SecondPannel = () => {
     const [img, setImage] = useState(null)
     const onChange = (e) => {
@@ -44,8 +54,9 @@ const SecondPannel = () => {
             <S.Pannel>
                 <S.DownloadBtnPannel>
                 <form>
-                <UploadBtn htmlFor='upload-file'>템플릿 업로드</UploadBtn>
-                <input type="file" id="upload-file" onChange={onChange} style={{display:"none"}}/>
+                    <UploadBtn htmlFor='upload-file'>템플릿 업로드</UploadBtn>
+                    <input type="file" id="upload-file" onChange={onChange} style={{display:"none"}}/>
+                    <FontNameInput placeholder="폰트 이름을 정해주세요"/>
                 </form>
                 </S.DownloadBtnPannel>
                 <S.StepPannel>

@@ -25,14 +25,12 @@ const StyledPannel = styled(S.Pannel)`
 const FourthPannel = () => {
     return (
         <S.Container>
-            <S.CommandText>step 4.폰트가 완성됐어요!</S.CommandText>
+            <S.CommandText>폰트가 완성됐어요!</S.CommandText>
             <StyledPannel>
             <TextContent>
-            폰트가 완성됐어요! 확인하러 가볼까요?
+            폰트가 완성됐어요!<br/> 마이페이지에서 확인할수 있어요!
             </TextContent>
-            <S.NextPannel>
-                <S.NextBtn to='/fontcreate/fifth'>NEXT</S.NextBtn>
-            </S.NextPannel>
+            <S.NextBtn to='/'>메인페이지</S.NextBtn>
             </StyledPannel>
             
         </S.Container>

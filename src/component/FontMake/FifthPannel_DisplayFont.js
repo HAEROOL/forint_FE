@@ -15,15 +15,7 @@ const DisplayPannel = styled.textarea`
     outline: none;
     border-radius: 10px;
 `
-const FontNameInput = styled.input`
-    width: 216px;
-    height: 48px;
-    border: 1px solid #ddd;
-    text-align: center;
-    font-size: 15px;
-    outline: none;
-    border-radius: 10px;
-`
+
 const InputWrapper = styled.div`
     width: 216px;
     margin: 0 auto;
@@ -36,9 +28,6 @@ const FifthPannel = () => {
             <S.CommandText>step 4. 폰트가 완성됐어요!</S.CommandText>
             <S.Pannel>
                 <DisplayPannel placeholder='직접 입력해볼 수도 있어요!'/>
-                <InputWrapper>
-                <FontNameInput placeholder="이름을 정해주세요"/>
-                </InputWrapper>
                 <S.StepPannel>
                 <S.PrevBtn to='/fontcreate/final'>공유하기</S.PrevBtn>
                 <S.NextBtn to='/'>다운로드</S.NextBtn>
