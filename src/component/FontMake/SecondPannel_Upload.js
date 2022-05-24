@@ -35,17 +35,26 @@ const FontNameInput = styled.input`
 `
 const SecondPannel = () => {
     const [img, setImage] = useState(null)
+    const [name, setName] = useState(null)
     const onChange = (e) => {
         setImage(e.target.files[0])
-        const formData = new FormData();
-        formData.append('file', img)
-        logined.post('',formData)
-        console.log(formData)
+    }
+    const nameChange = (e) => {
+        setName(e.target.value)
     }
     const onClick = async() => {
         const formData = new FormData();
         formData.append('file', img)
-        // const res = await logined.post('',formData)
+        formData.append('name', name)
+        formData.append('owner', localStorage.getItem('userAccount'))
+        logined.post('/fonts/',formData)
+        .then((response) => {
+            console.log('success')
+        }).catch(e => {
+            console.log(e)
+        })
+        console.log(img)
+        console.log(name)
         console.log(formData)
     }
     return (
@@ -55,9 +64,10 @@ const SecondPannel = () => {
                 <S.DownloadBtnPannel>
                 <form>
                     <UploadBtn htmlFor='upload-file'>템플릿 업로드</UploadBtn>
-                    <input type="file" id="upload-file" onChange={onChange} style={{display:"none"}}/>
-                    <FontNameInput placeholder="폰트 이름을 정해주세요"/>
+                    <input type="file" id="upload-file" onChange={onChange} style={{display:"none"}} required/>
+                    <FontNameInput placeholder="폰트 이름을 정해주세요" required onChange={nameChange}/>
                 </form>
+                <button onClick={onClick}>제출</button>
                 </S.DownloadBtnPannel>
                 <S.StepPannel>
                 <S.PrevBtn to='/fontcreate'>PREV</S.PrevBtn>

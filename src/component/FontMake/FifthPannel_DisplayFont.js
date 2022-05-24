@@ -16,12 +16,6 @@ const DisplayPannel = styled.textarea`
     border-radius: 10px;
 `
 
-const InputWrapper = styled.div`
-    width: 216px;
-    margin: 0 auto;
-    margin-top: 15px;
-    margin-bottom: 22px;
-`
 const FifthPannel = () => {
     return (
         <S.Container>
