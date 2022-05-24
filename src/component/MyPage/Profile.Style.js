@@ -53,6 +53,9 @@ margin-top: 6px;
 font-weight: 600;
 border: 1px solid #ddd;
 outline: none;
+&::placeholder{
+    font-size: 15px;
+}
 `
 export const MyFontPannel = styled.div`
 width: 309px;
