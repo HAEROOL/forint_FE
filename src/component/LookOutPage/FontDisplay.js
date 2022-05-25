@@ -68,7 +68,6 @@ const DetailContainer = styled.div`
 const GoodBtn = styled.div`
     display: flex;
     width: 56px;
-    justify-content: space-between;
     align-items: center;
     
 `
@@ -81,7 +80,7 @@ const Icon = styled.img`
 const Rate = styled.span`
     font-size: 18px;
     font-weight: 700;
-    margin-left: 1px;
+    margin-left: 5px;
 `
 const DownloadBtn = styled.a`
     padding: 2px 6px;
@@ -89,13 +88,17 @@ const DownloadBtn = styled.a`
     cursor: pointer;
 `
 
-
+const FontView = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
 const FontDisplay = ({data}) => {
-    const [likeRate, setRate] = useState(data.likeRate)
+    const [likeRate, setRate] = useState(data.like_num)
     const [isLiked, setLike] = useState(false)
     console.log(data)
     const userFont = {
-        fontFamily: data.fontTitle,
+        fontFamily: data.name,
         fontStyle: 'normal',
         fontWeight: 400,
         fontDisplay: 'swap',
@@ -118,13 +121,16 @@ const FontDisplay = ({data}) => {
             @import url({userFont.src});
             </style>
             <AnimationWrapper>
-            <FontPannel fontsrc={userFont}>안녕하세요</FontPannel>
+            <FontPannel fontsrc={userFont}>
+            < FontView src="http://localhost:8000/static/image/template.jpg" alt="asdf"/>
+            </FontPannel>
+
             <DetailContainer>
                 <GoodBtn onClick={() => clickLikeBtn()}>
                     {isLiked?<Icon src="/asset/image/HeartIcon_FILL.svg"/>:<Icon src="/asset/image/HeartIcon.svg"/>}
                     <Rate>{likeRate}</Rate>
                 </GoodBtn>
-                <DownloadBtn src={userFont.src} download={userFont.fontFamily}>다운로드</DownloadBtn>
+                <DownloadBtn href={'http://localhost:8000/static/image/template.jpg'} download>다운로드</DownloadBtn>
             </DetailContainer>
             </AnimationWrapper>
         </DisplayWrapper>

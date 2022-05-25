@@ -3,6 +3,7 @@ import styled from "styled-components";
 import FontDisplay from "./FontDisplay";
 import { DummyData } from "./dummyData";
 import axios from "axios";
+import TestPannel from "./testPannel";
 const Pannel = styled.div`
     width: 90%;
     padding: 10px 20px;
@@ -26,16 +27,17 @@ const DisplayPannel = () => {
             setArray(response.data)
         })
     },[])
+    console.log(fontDataArray)
     return(
         <Pannel>
             <RowPannel>
-            {DummyData.length > 0?DummyData.map((data,index) => (
+            {fontDataArray.length > 0?fontDataArray.map((data,index) => (
                 <FontDisplay key={index} data={data}/>
             )):
             <div>아직 등록된 폰트가 없습니다</div>
             }
             </RowPannel>
-            
+            <TestPannel/>
         </Pannel>
     )
 }
