@@ -39,9 +39,9 @@ function App() {
   return (
     <StyledContatiner>
     <Header/>
-    {/* <Routes>
+    <Routes>
     <Route path='/' element={<MainPage/>}/>
-    <Route path='/login' element={<LoginPage/>}/>
+    {/* <Route path='/login' element={<LoginPage/>}/>
     <Route path='/lookout' element={<LookOutPage/>}/>
     <Route path='/signup' element={<SignPage/>}/>
     <Route path='/fontcreate/*' element={<FontMakePage/>}>
@@ -50,8 +50,8 @@ function App() {
       <Route path="third" element={<ThirdPannel/>}/>
       <Route path="fourth" element={<FourthPannel/>}/>
     </Route>
-    <Route path='/mypage' element={<MyPage/>}/>
-  </Routes> */}
+    <Route path='/mypage' element={<MyPage/>}/> */}
+  </Routes>
   </StyledContatiner>
     
   );

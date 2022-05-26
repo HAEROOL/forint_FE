@@ -33,7 +33,7 @@ const LogoWrapper = styled(Link)`
     color: black;
     text-decoration: none;
     text-align: center;
-    margin-right: 40px;
+    margin-right: 85px;
 `
 const Logo = styled.img`
     width: 100px;
