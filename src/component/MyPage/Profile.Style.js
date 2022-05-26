@@ -1,38 +1,45 @@
 import styled from "styled-components"
+import {COLOR} from '../../staticColor'
 export const ProfilePannel = styled.div`
-width: 458px;
-height: 687px;
-background: #fff;
+width: 600px;
+background-color: white;
+max-height: 638px;
+border: 1px solid ${COLOR.lightgray};
+border-top: none;
 margin: 0 auto;
-display: flex;
-flex-direction: column;
-align-items: center;
-padding: 32px 18px 17px 18px;
-border: 1px solid #ddd;
-border-radius: 10px;
-box-shadow: 2px 2px 10px silver;
+padding: 170px 22px 100px 22px;
+`
+export const ProfileWrapper = styled.div`
+    width: 80%;
+    margin: 0 auto;
 `
 export const ProfileImage = styled.img`
 width: 150px;
 height: 150px;
 `
 export const ProfileContent = styled.div`
-width: 378px;
-height: 58px;
-margin-bottom: 27px;
-`
-export const Content = styled.div`
+display: flex;
+margin-bottom: 40px;
 width: 100%;
 display: flex;
-justify-content: space-between;
+`
+export const Content = styled.div`
+
 `
 export const ProfileLabel = styled.label`
-width: 69px;
-font-size: 15px;
+display: block;
+width: 170px;
+max-width: 170px;
+font-size: 20px;
 `
 export const ChangeBtn = styled.div`
 cursor: pointer;
-font-size: 12px;
+font-size: 20px;
+width: 70px;
+height: 30px;
+border-radius: 5px;
+text-align: center;
+background-color: ${COLOR.yellow};
 `
 export const ProfileImagePannel = styled.div`
 width: 150px;
@@ -40,21 +47,25 @@ text-align: right;
 margin-bottom: 20px;
 `
 export const LabelContent = styled.span`
-font-size: 25px;
+font-size: 20px;
 margin-left: 22px;
 font-weight: 600;
 `
 export const FixInfoBox = styled.input`
 font-size: 25px;
+width: 250px;
 height: 25px;
-// margin-left: 22px;
 padding-left: 10px;
-margin-top: 6px;
 font-weight: 600;
 border: 1px solid #ddd;
+border: none;
+border-bottom: 1px solid ${COLOR.gray};
 outline: none;
 &::placeholder{
     font-size: 15px;
+}
+&:last-child{
+    margin-top: 6px;
 }
 `
 export const MyFontPannel = styled.div`
@@ -74,4 +85,9 @@ align-items: center;
 background: #000;
 color: #fff;
 cursor: pointer;
+`
+
+export const Comment = styled.div`
+    font-size: 25px;
+    margin-bottom: 35px;
 `

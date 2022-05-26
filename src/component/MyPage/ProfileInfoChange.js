@@ -3,9 +3,17 @@ import styled from "styled-components";
 import logined from "../../api/logined";
 import * as S from './Profile.Style'
 const ContentWrapper = styled.div`
-    hegiht: 150px;
+    height: 50px;
     margin: 0 0 20px 0;
     padding: 0 0 20px 0;
+`
+const Content = styled.div`
+    display: flex;
+    
+`
+const PasswordWrapper = styled.div`
+    width: 270px;
+    margin-left:14px;
 `
 const ProfileInfoChange = ({infoname, content}) => {
     const [infoState, setState] = useState('READ')
@@ -59,21 +67,22 @@ const ProfileInfoChange = ({infoname, content}) => {
         }
     },[info, content])
     return (
-        <ContentWrapper>
+    <ContentWrapper>
     <S.ProfileContent>
-        <S.Content>
+        <Content>
             <S.ProfileLabel>{infoname}</S.ProfileLabel>
-            {infoname==='PASSWORD'?
-             <S.ChangeBtn onClick={()=>onClickChange()}>{infoState==='READ'?'변경':'완료'}</S.ChangeBtn>
-            :null}
-        </S.Content>
-        {infoState==='READ'?
+            {infoState==='READ'?
             (content?<S.LabelContent>{info}</S.LabelContent>:null)
         :
-            (<>
-            <S.FixInfoBox placeholder="비밀번호" defaultValue={info} onChange={onPasswordChange}type={infoname==='PASSWORD'?"password":null} ref={changeInfo}/>
-            <S.FixInfoBox placeholder="비밀번호확인" defaultValue={info} onChange={onPasswordCheckChange} type={infoname==='PASSWORD'?"password":null} ref={changeCheckInfo}/>
-            </>)}
+            (<PasswordWrapper>
+            <S.FixInfoBox placeholder="비밀번호" defaultValue={info} onChange={onPasswordChange}type={'password'} ref={changeInfo}/>
+            <S.FixInfoBox placeholder="비밀번호확인" defaultValue={info} onChange={onPasswordCheckChange} type={'password'} ref={changeCheckInfo}/>
+            </PasswordWrapper>)}
+            {infoname==='비밀번호'?
+             <S.ChangeBtn onClick={()=>onClickChange()}>{infoState==='READ'?'변경':'완료'}</S.ChangeBtn>
+            :null}
+        </Content>
+        
         
     </S.ProfileContent>
     </ContentWrapper>

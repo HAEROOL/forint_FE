@@ -6,6 +6,7 @@ import LoginPage from './page/LoginPage';
 import LookOutPage from './page/LookOutPage';
 import MainPage from './page/MainPage';
 import MyPage from './page/MyPage';
+import MyFontPage from './component/MyPage/MyfontPage';
 import SignPage from './page/SignPage';
 import FifthPannel from "./component/FontMake/FifthPannel_DisplayFont";
 import FinalPannel from "./component/FontMake/FinalPannel";
@@ -19,6 +20,7 @@ import { setRefreshOnHeader } from './api/logined';
 import { refresh } from './store/auth';
 import { getCookie } from './component/Shared/Cookies';
 import './App.css';
+import Profile from './component/MyPage/Profile';
 
 const StyledContatiner = styled.div`
 font-family: Noto Sans KR;
@@ -49,8 +51,11 @@ function App() {
       <Route path="second" element={<SecondPannel/>}/>
       <Route path="third" element={<ThirdPannel/>}/>
       <Route path="fourth" element={<FourthPannel/>}/>
+    </Route> */}
+    <Route path='/mypage' element={<MyPage/>}>
+      <Route index element={<Profile/>}/>
+      <Route path='fonts' element={<MyFontPage/>}/>
     </Route>
-    <Route path='/mypage' element={<MyPage/>}/> */}
   </Routes>
   </StyledContatiner>
     
