@@ -39,7 +39,7 @@ function App() {
   return (
     <StyledContatiner>
     <Header/>
-    <Routes>
+    {/* <Routes>
     <Route path='/' element={<MainPage/>}/>
     <Route path='/login' element={<LoginPage/>}/>
     <Route path='/lookout' element={<LookOutPage/>}/>
@@ -51,7 +51,7 @@ function App() {
       <Route path="fourth" element={<FourthPannel/>}/>
     </Route>
     <Route path='/mypage' element={<MyPage/>}/>
-  </Routes>
+  </Routes> */}
   </StyledContatiner>
     
   );

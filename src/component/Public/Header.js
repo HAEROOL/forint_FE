@@ -9,34 +9,42 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/auth";
 
+const Pannel = styled.div`
+width: 100%;
+&:after{
+    content: "";
+    display: block;
+    width: 93%;
+    margin: 0 auto;
+    border-bottom: 1px solid rgb(191,191,191);
+}
+`
 const HeaderWrapper = styled.div`
-    width: 100%;
+    width: 90%;
     display: flex;
-    flex-direction: column;
+    margin: 0 auto;
     font-family: Noto Sans KR;
     font-weight: 500;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
+    margin-top: 50px;
 `
 const LogoWrapper = styled(Link)`
-    width: 216px;
     margin: 0 auto;
     color: black;
     text-decoration: none;
     text-align: center;
+    margin-right: 40px;
 `
-const Logo = styled.div`
-    font-size: 55px;
-    font-family: SueEllenFrancisco;
-    font-weight: 500;
-    font-display: swap;
+const Logo = styled.img`
+    width: 100px;
 `
 const HeaderMenuList = styled.div`
     display: flex;
     justify-content: space-between;
-    width: 90%;
-    max-width: 700px;
+    width: 100%;
     margin: 0 auto;
     font-weight: 400;
+    align-items: end;
 `
 const Menu = styled(Link)`
     font-size: 20px;
@@ -44,6 +52,16 @@ const Menu = styled(Link)`
     text-decoration: none;
 `
 
+const MainMenu = styled.div`
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+`
+const UserMenu = styled.div`
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+`
 const LogoutBtn = styled.div`
 font-size: 20px;
     color: black;
@@ -69,26 +87,31 @@ const Header = () => {
         setLog(isLoggedIn)
     },[isLoggedIn])
     return (
+        <Pannel>
         <HeaderWrapper location={location.pathname==='/'?1:0}>
             <LogoWrapper to='/'>
-                <Logo>MR.Hant</Logo>
+                <Logo src="/asset/image/Forint_logo.png"/>
             </LogoWrapper>
             <HeaderMenuList>
+                <MainMenu>
                 <Menu to='/fontcreate' location={location.pathname==='/'?1:0}>폰트 만들기</Menu>
                 <Menu to='/lookout' location={location.pathname==='/'?1:0}>둘러보기</Menu>
+                </MainMenu>
+                
                 {isLog?
-                    <>
-                    <Menu to='/mypage' location={location.pathname==='/'?1:0}>마이페이지</Menu>
-                    <LogoutBtn onClick={() => clickLogout()}>로그아웃</LogoutBtn>
-                    </>
+                    <UserMenu>
+                        <Menu to='/mypage' location={location.pathname==='/'?1:0}>마이페이지</Menu>
+                        <LogoutBtn onClick={() => clickLogout()}>로그아웃</LogoutBtn>
+                    </UserMenu>
                     :
-                    <>
-                    <Menu to='/login' location={location.pathname==='/'?1:0}>로그인</Menu>
-                    <Menu to='/signup' location={location.pathname==='/'?1:0}>회원가입</Menu>
-                    </>
+                    <UserMenu>
+                        <Menu to='/login' location={location.pathname==='/'?1:0}>로그인</Menu>
+                        <Menu to='/signup' location={location.pathname==='/'?1:0}>회원가입</Menu>
+                    </UserMenu>
                 }
             </HeaderMenuList>
         </HeaderWrapper>
+        </Pannel>
     )
 }
 
