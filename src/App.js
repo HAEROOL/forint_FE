@@ -46,12 +46,12 @@ function App() {
     <Route path='/login' element={<LoginPage/>}/>
     <Route path='/signup' element={<SignPage/>}/>
     <Route path='/lookout' element={<LookOutPage/>}/>
-    {/* <Route path='/fontcreate/*' element={<FontMakePage/>}>
+    <Route path='/fontcreate/*' element={<FontMakePage/>}>
       <Route index element={<FirsrtPannel/>}/>
       <Route path="second" element={<SecondPannel/>}/>
       <Route path="third" element={<ThirdPannel/>}/>
       <Route path="fourth" element={<FourthPannel/>}/>
-    </Route> */}
+    </Route>
     <Route path='/mypage' element={<MyPage/>}>
       <Route index element={<Profile/>}/>
       <Route path='fonts' element={<MyFontPage/>}/>
