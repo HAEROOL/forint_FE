@@ -20,38 +20,7 @@ const PageWrapper = styled.div`
         border-top: 1px solid ${COLOR.lightgray};
     }
 `
-const dummy = {
-    email:'asdasdfasdff@aasdfasdfdsf.com',
-    name: 'LEess',
-    nickname: 'cococo',
-    password: null,
-    fonts:[]
-}
-const Profile = () => {
-    // const [userInfo, setInfo] = useState({
-    //     email: '',
-    //     nickname: '',
-    //     password: null,
-    //     name: '',
-    //     fonts: []
-    // })
-    const [userInfo, setInfo] = useState({
-        ...dummy
-    })
-    const userAccount = localStorage.getItem('userAccount')
-    const dispatch = useDispatch()
-    
-    useLayoutEffect(() => {
-        // dispatch(getUserInfo({email:'admin@admin.com'}))
-        logined.get(`users/${userAccount}/`)
-        .then((response) => {
-            setInfo({
-                ...userInfo,
-                ...response.data
-            })
-        })
-    },[])
-
+const Profile = ({userInfo}) => {
     return(
         <PageWrapper>
         <S.ProfilePannel>
