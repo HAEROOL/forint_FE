@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import logined from "../../api/logined";
 import * as S from './Public.style'
-
+import { COLOR } from "../../staticColor";
 export const UploadBtn = styled.label`
     width: 172px;
     height: 51px;
@@ -33,6 +33,26 @@ const FontNameInput = styled.input`
     border-radius: 10px;
     margin: 15px 0 0 0;
 `
+const WarningText = styled.div`
+    width: 100%;
+    display: flex;;
+    justify-content: center;
+    align-items: center;
+    color: ${COLOR.red};
+    font-size: 30px;
+`
+
+const WarnDetail = styled.div`
+    width: 80%;
+    font-size: 25px;
+`
+const TextPannel = styled.div`
+    width: 100%;
+    display: flex;;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+`
 const SecondPannel = () => {
     const [img, setImage] = useState(null)
     const [name, setName] = useState(null)
@@ -53,15 +73,23 @@ const SecondPannel = () => {
         }).catch(e => {
             console.log(e)
         })
-        console.log(img)
-        console.log(name)
-        console.log(formData)
     }
     return (
         <S.Container>
-            <S.CommandText>step 2. 작성한 템플릿을 업로드 해주세요!</S.CommandText>
+            <S.CommandText>작성한 템플릿을 업로드 해주세요.</S.CommandText>
             <S.Pannel>
-                <S.DownloadBtnPannel>
+            <WarningText>
+                    <img src="/asset/image/Bulb.png" alt="warn"/>
+                    템플릿 작성시 주의사항
+                </WarningText>
+                <TextPannel>
+                <WarnDetail>1. &nbsp;  칸 가운데에 맞춰 최대한 반듯하게 글자를 작성해 주세요.</WarnDetail>
+                <WarnDetail>2.  &nbsp; 템플릿 스캔 시 반듯한 종이를 사용해 주세요.<br/> &nbsp;  &nbsp;  &nbsp; ( 안드로이드 및 ios 문서스캔 기능 사용 필수 )</WarnDetail>
+                <br/>
+                <WarnDetail style={{textAlign: 'center;'}}>* 태블릿을 이용해 작성하는 것을 추천</WarnDetail>
+                </TextPannel>
+            </S.Pannel>
+            <S.DownloadBtnPannel>
                 <form>
                     <UploadBtn htmlFor='upload-file'>템플릿 업로드</UploadBtn>
                     <input type="file" id="upload-file" onChange={onChange} style={{display:"none"}} required/>
@@ -73,7 +101,6 @@ const SecondPannel = () => {
                 <S.PrevBtn to='/fontcreate'>PREV</S.PrevBtn>
                 <S.NextBtn to='/fontcreate/fourth'>NEXT</S.NextBtn>
                 </S.StepPannel>
-            </S.Pannel>
         </S.Container>
     )
 }

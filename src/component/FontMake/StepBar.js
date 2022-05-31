@@ -6,6 +6,7 @@ const BarContainer = styled.div`
     width: 780px;
     margin: 0 auto;
     display: flex;
+    margin: 100px auto 0 auto;
 `
 const StepCircle = styled.div`
     background-color: ${props=>props.isStep?COLOR.yellow:'white'};
@@ -35,15 +36,15 @@ const Bar = styled.div`
 const StepBar = ({step}) => {
     return(
         <BarContainer>
-        <StepCircle isStep={step===1}>1</StepCircle>
+        <StepCircle isStep={step>=1}>1</StepCircle>
         <BarPannel>
-        <Bar/>
+        <Bar isStep={step>=2}/>
         </BarPannel>
-        <StepCircle isStep={step===2}>2</StepCircle>
+        <StepCircle isStep={step>=2}>2</StepCircle>
         <BarPannel>
-        <Bar/>
+        <Bar isStep={step>=3}/>
         </BarPannel>
-        <StepCircle isStep={step===3}>3</StepCircle>
+        <StepCircle isStep={step>=3}>3</StepCircle>
         
         </BarContainer>
     )
