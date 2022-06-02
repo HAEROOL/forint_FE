@@ -74,6 +74,7 @@ const UserMenu = styled.div`
 const LogoutBtn = styled.div`
 font-size: 20px;
     color: black;
+    margin: 2px 0 0 0;
     &:hover{
         cursor: pointer;
     }
@@ -97,13 +98,13 @@ const Header = () => {
     },[isLoggedIn])
     return (
         <Pannel>
-        <HeaderWrapper location={location.pathname==='/'?1:0}>
+        <HeaderWrapper>
             <LogoWrapper to='/'>
                 <Logo src="/asset/image/Forint_logo.png"/>
             </LogoWrapper>
             <HeaderMenuList>
                 <MainMenu>
-                <Menu to='/fontcreate' location={location.pathname==='/fontcreate'}>폰트 만들기</Menu>
+                <Menu to='/fontcreate' location={location.pathname==='/fontcreate'||location.pathname==='/fontcreate/second'||location.pathname==='/fontcreate/fourth'}>폰트 만들기</Menu>
                 <Menu to='/lookout' location={location.pathname==='/lookout'}>둘러보기</Menu>
                 </MainMenu>
                 

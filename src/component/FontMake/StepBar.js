@@ -9,8 +9,8 @@ const BarContainer = styled.div`
     margin: 100px auto 0 auto;
 `
 const StepCircle = styled.div`
-    background-color: ${props=>props.isStep?COLOR.yellow:'white'};
-    border: 2px solid ${COLOR.yellow};
+    background-color: ${props=>props.isStep?COLOR.heavyyellow:'white'};
+    border: 2px solid ${COLOR.heavyyellow};
     width: 60px;
     height: 60px;
     border-radius: 100px;
@@ -23,25 +23,26 @@ const StepCircle = styled.div`
 const BarPannel = styled.div`
     width: 300px;
     height: 10px;
-    border: 2px solid ${COLOR.yellow};
+    border: 2px solid ${COLOR.heavyyellow};
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 25px -4px 0 -2px;
+    margin: ${props=>props.isStep?'25px -4px 0 -3px':'25px -4px 0 -2px'};
 `
 const Bar = styled.div`
     width: 300px;
     height: 20px;
+    background-color: ${props=>props.isStep?COLOR.heavyyellow:''};
 `
 const StepBar = ({step}) => {
     return(
         <BarContainer>
         <StepCircle isStep={step>=1}>1</StepCircle>
-        <BarPannel>
+        <BarPannel isStep={step>=2}>
         <Bar isStep={step>=2}/>
         </BarPannel>
         <StepCircle isStep={step>=2}>2</StepCircle>
-        <BarPannel>
+        <BarPannel isStep={step>=3}>
         <Bar isStep={step>=3}/>
         </BarPannel>
         <StepCircle isStep={step>=3}>3</StepCircle>
