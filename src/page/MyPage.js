@@ -1,10 +1,11 @@
-import React,{useState, useLayoutEffect} from "react";
+import React,{useState, useEffect} from "react";
 import styled from "styled-components";
-import { Route, Routes } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 import MyFontPage from "../component/MyPage/MyfontPage";
 import Profile from "../component/MyPage/Profile";
 import MypageHeader from "../component/MyPage/MypageHeader";
 import logined from "../api/logined";
+import { useSelector } from "react-redux";
 const PageWrapper = styled.div`
 display: flex;
 flex-direction: column;
@@ -26,8 +27,10 @@ const MyPage = () =>{
         name: '',
         fonts: ['https://picsum.photos/200']
     })
+    const navigation = useNavigate()
+    const {isLoggedIn} = useSelector((state) => state.auth)
     const userAccount = localStorage.getItem('userAccount')
-    useLayoutEffect(() => {
+    useEffect(() => {
         logined.get(`users/${userAccount}/`)
         .then((response) => {
             setInfo({
@@ -36,6 +39,12 @@ const MyPage = () =>{
             })
         })
     },[])
+    useEffect(() => {
+        if(!isLoggedIn){
+            alert('로그인 해주세요')
+            navigation('/')
+        }
+    },[isLoggedIn, navigation])
     return(
         <PageWrapper>
             <PageContent>
