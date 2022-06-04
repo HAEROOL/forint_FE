@@ -1,51 +1,53 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { COLOR } from "../../staticColor";
 export const Container = styled.div`
-    width: 494px;
+    width: 780px;
     margin: 0 auto;
     margin-top: 50px;
 `
 export const CommandText = styled.span`
     display: block;
-    width: 494px;
-    font-size: 20px;
+    width: 780px;
+    font-size: 35px;
     text-align: center;
-    margin-bottom: 9px;
+    margin-bottom: 15px;
 `
 export const Pannel = styled.div`
-    width: 472px;
-    height: 647px;
-    padding: 0 11px 19px 11px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px silver;
-`
-export const DownloadBtnPannel = styled.div`
-    width: 100%;
-    height: 596px;
+    width: 780px;
+    height: 247px;
+    border: 1px solid ${COLOR.gray};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
 `
-export const DownloadBtn = styled.a`
-    width: 172px;
-    height: 51px;
+export const DownloadBtnPannel = styled.div`
+    width: 100%;
     display: flex;
-    top: 270px;
-    position: absolute;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
+`
+export const DownloadBtn = styled.a`
+    width: 400px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
     text-align: center;
     margin: 0 auto;
+    margin: 20px 0 0 0;
     cursor: pointer;
     border-radius: 10px;
     border: 1px solid #ddd;
     transition: all 0.2s;
     text-decoration-line: none;
+    color: black;
+    font-weight: 600;
+    background-color: ${COLOR.heavyyellow};
     &:hover{
         top: 265px;
         box-shadow: 2px 2px 10px silver;
@@ -57,25 +59,27 @@ export const NextBtn = styled(Link)`
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
-    color: #fff;
-    background: #000;
+    font-size: 25px;
+    color: black;
+    background: ${COLOR.yellow};
     cursor: pointer;
     border-radius: 10px;
+    font-weight: 600;
     text-decoration-line: none;
 `
 export const PrevBtn = styled(Link)`
-    width: 172px;
-    height: 51px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 15px;
-    color: #fff;
-    background: #000;
-    cursor: pointer;
-    border-radius: 10px;
-    text-decoration-line: none;
+width: 172px;
+height: 51px;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 25px;
+color: black;
+background: ${COLOR.yellow};
+cursor: pointer;
+border-radius: 10px;
+font-weight: 600;
+text-decoration-line: none;
 `
 export const NextPannel = styled.div`
     width: 100%;

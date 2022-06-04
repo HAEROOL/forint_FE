@@ -157,40 +157,37 @@ const SignForm = () => {
     return(
         <SignFormPageWrapper>
             <S.SignFromWrapper>
+                <S.LogoPannel>
+            <S.LogoImg src='/asset/image/Forint_logo.png'/>
+            </S.LogoPannel>
             <S.FormText>회원가입</S.FormText>
             <S.FormWrapper>
                 <P.Form>
-                    <P.FormName>Email</P.FormName>
-                    <P.FormInput onChange={onChange} name='email'/>
+                    <P.FormInput onChange={onChange} name='email' placeholder='이메일'/>
                     <S.CheckboxWrapper>
                         <S.CheckBox onClick={checkDuplicateEmail}>
+                        <S.CheckButton/>
                             중복확인
-                            <S.CheckButton/>
                         </S.CheckBox>
                         {permitSign.emailDuplicate && <S.CheckText>확인되었습니다!</S.CheckText>}
                         {permitSign.emailDuplicate!==null && !permitSign.emailDuplicate && <S.CheckText>중복된 계정이 존재합니다.</S.CheckText>}
                     </S.CheckboxWrapper>
-                    
                 </P.Form>
                 <P.Form>
-                    <P.FormName >PassWord</P.FormName>
-                    <P.FormInput type="password" onChange={onChange} name='password'/>
+                    <P.FormInput type="password" onChange={onChange} name='password'placeholder='비밀번호'/>
                 </P.Form>
                 <P.Form checkPass={permitSign.passwordSame}>
-                    <P.FormName>PassWord Check</P.FormName>
-                    <P.FormInput type="password" onChange={onChange} name='passwordConfirm' ref={pwdRef}/>
+                    <P.FormInput type="password" onChange={onChange} name='passwordConfirm' ref={pwdRef}placeholder='비밀번호 확인'/>
                 </P.Form>
                 <P.Form>
-                    <P.FormName >Name</P.FormName>
-                    <P.FormInput onChange={onChange} name='name'/>
+                    <P.FormInput onChange={onChange} name='name'placeholder='이름'/>
                 </P.Form>
                 <P.Form>
-                    <P.FormName>NickName</P.FormName>
-                    <P.FormInput onChange={onChange} name='nickname'/>
+                    <P.FormInput onChange={onChange} name='nickname' placeholder='닉네임'/>
                     <S.CheckboxWrapper>
                         <S.CheckBox onClick={checkDuplicateNickname}>
+                        <S.CheckButton/>
                             중복확인
-                            <S.CheckButton/>
                         </S.CheckBox>
                         {permitSign.nicknameDuplicate && <S.CheckText>확인되었습니다!</S.CheckText>}
                         {permitSign.nicknameDuplicate!==null && !permitSign.nicknameDuplicate && <S.CheckText>중복된 닉네임이 존재합니다.</S.CheckText>}

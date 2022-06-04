@@ -9,6 +9,7 @@ import { userAccount } from "../../store/user";
 
 const PageWrapper = styled.div`
 `
+
 const LoginForm = () => {
     const dispatch = useDispatch();
     const navigation = useNavigate()
@@ -54,15 +55,14 @@ const LoginForm = () => {
     return (
         <PageWrapper>
             <S.LoginPlate>
+                <S.LogoPannel>
+                <S.LogoImg src="/asset/image/Forint_logo.png" alt="logo"/>
+                </S.LogoPannel>
                 <S.LoginText>로그인</S.LoginText>
                 <S.FormWrapper>
                     <S.Form>
-                        <S.FormName>ID</S.FormName>
-                        <S.FormInput onChange={onChange} name='account'/>
-                    </S.Form>
-                    <S.Form>
-                        <S.FormName>PassWord</S.FormName>
-                        <S.FormInput type="password" onChange={onChange} name='password'/>
+                        <S.FormInput onChange={onChange} name='account' placeholder="아이디"/>
+                        <S.FormInput type="password" onChange={onChange} placeholder="비밀번호" name='password'/>
                     </S.Form>
                 </S.FormWrapper>
                 <S.SubmitBtn onClick={clickLogin}>로그인</S.SubmitBtn>

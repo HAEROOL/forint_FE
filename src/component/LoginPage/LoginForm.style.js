@@ -1,19 +1,19 @@
 import styled from "styled-components";
+import {COLOR} from '../../staticColor'
+
+
 export const LoginPlate = styled.div`
     width: 453px;
-    height: 381px;
-    border: 1px solid #ddd;
-    position: relative;
-    top: 250px;
+    border: 1px solid ${COLOR.lightgray};
     margin: 0 auto;
-    padding: 12px 22px;
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px silver;
+    margin-top: 100px;
+    padding: 37px 22px 50px 22px;
 `
-export const LoginText = styled.span`
-    display: flex;
-    width: 100%;
-    font-size: 29px;
+export const LoginText = styled.div`
+    display: block;
+    margin-top: 15px;
+    font-size: 40px;
+    text-align: center;
 `
 export const FormWrapper = styled.div`
     width: 360px;
@@ -31,9 +31,11 @@ export const FormInput = styled.input`
     width: 320px;
     height: 50px;
     padding: 0 20px;
-    border: 2px solid #000;
+    border: 1px solid ${COLOR.lightgray};
+    corlor: ${COLOR.lightgray};
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 25px;
+    margin-bottom: 25px;
 `
 export const FormName = styled.span`
     font-size: 20px;
@@ -51,15 +53,23 @@ export const DeleteAll = styled.div`
     background: #fff;
 `
 export const SubmitBtn = styled.div`
-    width: 120px;
-    height: 40px;
+    width: 360px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: #fff;
-    border: 2px solid #000;
+    background: ${COLOR.yellow};
     border-radius: 5px;
     margin: 0 auto;
-    margin-top: 40px;
+    font-size: 35px;
+    margin-top: 25px;
+`
+
+export const LogoImg = styled.img`
+    width: 150px;
+`
+export const LogoPannel = styled.div`
+    width: 150px;
+    margin: 0 auto;
 `
