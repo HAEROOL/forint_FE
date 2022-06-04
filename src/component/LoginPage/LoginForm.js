@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useReducer, useRef, useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -6,10 +6,17 @@ import auth, { login } from "../../store/auth";
 import {useNavigate} from 'react-router-dom';
 import * as S from './LoginForm.style';
 import { userAccount } from "../../store/user";
+import { COLOR } from "../../staticColor";
+import useDidMountEffect from "../../hooks/useDidMountEffect";
 
 const PageWrapper = styled.div`
 `
-
+const AlertWrapper = styled.div`
+    text-align: center;
+    color: ${COLOR.red};
+    width: 100%;
+    margin: -35px 0 0 0;
+`
 const LoginForm = () => {
     const dispatch = useDispatch();
     const navigation = useNavigate()
@@ -18,15 +25,16 @@ const LoginForm = () => {
         account: null,
         password: null
     })
-    useEffect(() => {
+    const [alertMsg, setAlert] = useState(null)
+    useDidMountEffect(() => {
         if(isLoggedIn){
             dispatch(userAccount(loginInfo.account))
             navigation('/')
-        }
-        if(authError === '아이디 또는 비밀번호가 다릅니다'){
-            alert('아이디 또는 비밀번호가 다릅니다')
+        }else if(authError ==='아이디 또는 비밀번호가 다릅니다'){
+            setAlert(true)
         }
     },[isLoggedIn, authError])
+
     const onChange = (e) => {
         const name = e.target.name;
         switch(name){
@@ -64,6 +72,7 @@ const LoginForm = () => {
                         <S.FormInput onChange={onChange} name='account' placeholder="아이디"/>
                         <S.FormInput type="password" onChange={onChange} placeholder="비밀번호" name='password'/>
                     </S.Form>
+                    {alertMsg?<AlertWrapper><span>아이디 또는 비밀번호가 다릅니다</span></AlertWrapper>:null}
                 </S.FormWrapper>
                 <S.SubmitBtn onClick={clickLogin}>로그인</S.SubmitBtn>
             </S.LoginPlate>
