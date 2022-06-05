@@ -25,7 +25,7 @@ const MyPage = () =>{
         nickname: '',
         password: null,
         name: '',
-        fonts: ['https://picsum.photos/200']
+        fonts: []
     })
     const navigation = useNavigate()
     const {isLoggedIn} = useSelector((state) => state.auth)
@@ -34,7 +34,6 @@ const MyPage = () =>{
         logined.get(`users/${userAccount}/`)
         .then((response) => {
             setInfo({
-                ...userInfo,
                 ...response.data
             })
         })

@@ -22,7 +22,6 @@ const HeaderElement = styled(Link)`
 
 const MypageHeader = () => {
     const location = useLocation()
-    console.log(location)
     return(
         <>
         <Header>

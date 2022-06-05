@@ -4,6 +4,7 @@ import * as S from './Profile.Style'
 import { COLOR } from "../../staticColor";
 import FontPannel from "../../page/FontPannel";
 import { Link } from "react-router-dom";
+import FontDetailPannel from "./FontDetailPannel";
 const PageWrapper = styled.div`
 &:before{
     width: 443px;
@@ -38,10 +39,8 @@ const MyFontPage = ({fonts}) => {
     return(
         <PageWrapper>
         <S.ProfilePannel>
-
-            {fonts?fonts.map((index, url) => {
-                <FontPannel fontUrl={url} key={index}/>
-            }):
+            {fonts?<FontDetailPannel fontList={fonts}/>
+            :
             <RecommendPannel>
                 <span>
                 아직 당신의 폰트가 없군요?

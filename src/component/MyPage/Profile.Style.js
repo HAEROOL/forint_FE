@@ -8,6 +8,7 @@ border: 1px solid ${COLOR.lightgray};
 border-top: none;
 margin: 0 auto;
 padding: 170px 22px 100px 22px;
+
 `
 export const ProfileWrapper = styled.div`
     width: 80%;

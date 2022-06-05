@@ -108,7 +108,6 @@ const SignForm = () => {
         }
     }
     const checkDuplicateNickname = (e) => {
-        console.log(signInfo.nickname)
         axios.post('http://127.0.0.1:8000/users/registration/nickname-check/',{nickname: signInfo.nickname})
         .then(function(response){
             setPermit({
@@ -126,33 +125,28 @@ const SignForm = () => {
 
     
     const submitSignInfo = () => {
-        // console.log('회원가입 정보를 넘겨줍니다')
-        // if(!(signInfo.email && signInfo.name && signInfo.nickname && signInfo.password)){
-        //     alert('모두 입력해주세요')
-        // }else if(!permitSign.emailDuplicate){
-        //     alert('중복된 계정입니다. 다른 계정을 사용해주세요')
-        // }else if(!permitSign.passwordSame){
-        //     alert('비밀번호와 비밀번호 확인이 맞지 않습니다')
-        // }else{
-        //     dispatch(register(signInfo))
-        //     console.log('회원가입을 진행합니다.')
-        //     console.log(signInfo)
-        // }
-        // dispatch(register(signInfo))
-        axios.post('http://127.0.0.1:8000/users/registration/',{
-            username: signInfo.name,
-            email: signInfo.email,
-            password1: signInfo.password,
-            password2: signInfo.password,
-            nickname: signInfo.nickname,
-            profile_image: null
-        }).then(function(response){
-            alert('회원가입 성공!')
-            navigation('/')
-        })
-        .catch(function(error){
-            alert('실패했습니다. 다시 시도해주세요')
-        })
+        if(!(signInfo.email && signInfo.name && signInfo.nickname && signInfo.password)){
+            alert('모두 입력해주세요')
+        }else if(!permitSign.emailDuplicate){
+            alert('중복된 계정입니다. 다른 계정을 사용해주세요')
+        }else if(!permitSign.passwordSame){
+            alert('비밀번호와 비밀번호 확인이 맞지 않습니다')
+        }else{
+            axios.post('http://127.0.0.1:8000/users/registration/',{
+                username: signInfo.name,
+                email: signInfo.email,
+                password1: signInfo.password,
+                password2: signInfo.password,
+                nickname: signInfo.nickname,
+                profile_image: null
+            }).then(function(response){
+                alert('회원가입 성공!')
+                navigation('/')
+            })
+            .catch(function(error){
+                alert('실패했습니다. 다시 시도해주세요')
+            })
+        }
     }
     return(
         <SignFormPageWrapper>

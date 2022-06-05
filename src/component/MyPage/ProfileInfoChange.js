@@ -53,7 +53,6 @@ const ProfileInfoChange = ({infoname, content}) => {
             passwordCheck: e.target.value
         })
     }
-    console.log(compPassword)
     useEffect(() => {
         if(info !== content){
             logined.post(`users/password/change/`, {new_password1:info,new_password2:info})
