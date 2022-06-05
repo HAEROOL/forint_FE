@@ -31,19 +31,18 @@ const MyPage = () =>{
     const {isLoggedIn} = useSelector((state) => state.auth)
     const userAccount = sessionStorage.getItem('userAccount')
     useEffect(() => {
-        logined.get(`users/${userAccount}/`)
-        .then((response) => {
-            setInfo({
-                ...response.data
-            })
-        })
-    },[])
-    useEffect(() => {
-        if(!isLoggedIn){
+        if(!isLoggedIn && !userAccount){
             alert('로그인 해주세요')
             navigation('/')
+        }else{
+            logined.get(`users/${userAccount}/`)
+            .then((response) => {
+                setInfo({
+                    ...response.data
+                })
+            })
         }
-    },[isLoggedIn, navigation])
+    },[isLoggedIn])
     return(
         <PageWrapper>
             <PageContent>

@@ -52,7 +52,7 @@ function App() {
       <Route path="third" element={<ThirdPannel/>}/>
       <Route path="fourth" element={<FourthPannel/>}/>
     </Route>
-    <Route path='/mypage' element={<MyPage/>}>
+    <Route path='/mypage/*' element={<MyPage/>}>
       <Route index element={<Profile/>}/>
       <Route path='fonts' element={<MyFontPage/>}/>
     </Route>
