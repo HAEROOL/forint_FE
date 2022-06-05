@@ -79,7 +79,7 @@ const user = handleActions(
 
           [SETACCOUNT]: (state, payload) => ({
             ...state,
-            userAccount: localStorage.setItem('userAccount',payload.payload.email)
+            userAccount: sessionStorage.setItem('userAccount',payload.payload.email)
           })
     },
     initialState

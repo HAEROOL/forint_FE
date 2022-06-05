@@ -29,7 +29,7 @@ const MyPage = () =>{
     })
     const navigation = useNavigate()
     const {isLoggedIn} = useSelector((state) => state.auth)
-    const userAccount = localStorage.getItem('userAccount')
+    const userAccount = sessionStorage.getItem('userAccount')
     useEffect(() => {
         logined.get(`users/${userAccount}/`)
         .then((response) => {

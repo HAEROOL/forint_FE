@@ -80,7 +80,7 @@ const FirsrtPannel = () => {
                 <WarnDetail>1. &nbsp;  칸 가운데에 맞춰 최대한 반듯하게 글자를 작성해 주세요.</WarnDetail>
                 <WarnDetail>2.  &nbsp; 템플릿 스캔 시 반듯한 종이를 사용해 주세요.<br/> &nbsp;  &nbsp;  &nbsp; ( 안드로이드 및 ios 문서스캔 기능 사용 필수 )</WarnDetail>
                 <br/>
-                <WarnDetail style={{textAlign: 'center;'}}>* 태블릿을 이용해 작성하는 것을 추천</WarnDetail>
+                <WarnDetail style={{textAlign: 'center'}}>* 태블릿을 이용해 작성하는 것을 추천</WarnDetail>
                 </TextPannel>
                 </>
             :<>

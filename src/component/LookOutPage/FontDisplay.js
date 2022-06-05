@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
+import logined from "../../api/logined";
 const DisplayWrapper = styled.div`
     width: 400px;
     height: 340px;
@@ -45,16 +47,6 @@ const FontPannel = styled.div`
         margin: 0 auto;
         margin-top: 153px;
     }
-    @font-face{
-        font-family: ${props => props.fontsrc.fontFamily};
-        font-style: ${props => props.fontsrc.fontStyle};
-        font-weight: ${props => props.fontsrc.fontStyle};
-        font-display: swap format('woff2');
-        src: url(${props => props.fontsrc.src}) ;
-    }
-    font-family:${props => props.fontsrc.fontFamily};
-    font-style: normal;
-    font-weight: 400;
 `
 const DetailContainer = styled.div`
     display: flex;
@@ -82,7 +74,7 @@ const Rate = styled.span`
     font-weight: 700;
     margin-left: 5px;
 `
-const DownloadBtn = styled.a`
+const DownloadBtn = styled.div`
     padding: 2px 6px;
     border: 2px solid #fff;
     cursor: pointer;
@@ -93,10 +85,11 @@ const FontView = styled.img`
     height: 100%;
     object-fit: cover;
 `
+
 const FontDisplay = ({data}) => {
     const [likeRate, setRate] = useState(data.like_num)
     const [isLiked, setLike] = useState(false)
-    console.log(data)
+    const [fileData, setData] = useState(null)
     const userFont = {
         fontFamily: data.name,
         fontStyle: 'normal',
@@ -115,14 +108,29 @@ const FontDisplay = ({data}) => {
         }
         
     }
+
+    const downloadFile = (file) => {
+        const filename = 'source.ttf'
+        axios.get('http://127.0.0.1:8000/media/font/admin%40admin.com/jua.ttf',{
+            responseType: 'arraybuffer',
+            // data: ""
+        })
+        .then((response) => {
+            console.log(response)
+            const blob = new Blob([response.data])
+            const path = window.URL.createObjectURL(blob)
+            const link = document.createElement('a')
+            link.href = path
+            link.download = filename
+            link.click()
+            link.remove()
+        })
+    }
     return(
         <DisplayWrapper>
-            <style>
-            @import url({userFont.src});
-            </style>
             <AnimationWrapper>
             <FontPannel fontsrc={userFont}>
-            < FontView src="http://localhost:8000/static/image/template.jpg" alt="asdf"/>
+            < FontView src={data.file} alt="asdf"/>
             </FontPannel>
 
             <DetailContainer>
@@ -130,7 +138,7 @@ const FontDisplay = ({data}) => {
                     {isLiked?<Icon src="/asset/image/HeartIcon_FILL.svg"/>:<Icon src="/asset/image/HeartIcon.svg"/>}
                     <Rate>{likeRate}</Rate>
                 </GoodBtn>
-                <DownloadBtn href={'http://localhost:8000/static/image/template.jpg'} download>다운로드</DownloadBtn>
+                <DownloadBtn onClick={() =>downloadFile(data.file)}>다운로드</DownloadBtn>
             </DetailContainer>
             </AnimationWrapper>
         </DisplayWrapper>
