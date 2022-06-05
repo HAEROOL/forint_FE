@@ -2,14 +2,19 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import * as S from './SignForm.style'
 import * as P from '../Public/FormStyle'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { register} from "../../store/auth";
 import { useEffect } from "react";
 import { checkEmailRegEx } from "../utils/checkRefExp";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { useNavigate } from "react-router";
 const SignFormPageWrapper = styled.div`
 `
 // api 관련 확인해야 함
 const SignForm = () => {
     const dispatch = useDispatch()
+    const navigation = useNavigate()
     const pwdRef = useRef()
     const [signInfo,setInfo] = useState({
         name:null,
@@ -19,7 +24,8 @@ const SignForm = () => {
     })
     const [permitSign, setPermit] = useState({
         passwordSame: false,
-        emailDuplicate: false,
+        emailDuplicate: null,
+        nicknameDuplicate: null
     })
     const onChange = (e) => {
         const name = e.target.name;
@@ -82,34 +88,43 @@ const SignForm = () => {
     }
 
 
-   console.log(signInfo)
     const checkDuplicateEmail = (e) => {
-        console.log('계정 중복을 체크합니다.')
-        console.log(signInfo.email)
         if(checkEmailRegEx(signInfo.email)){
-            // dispatch(checkDuplicate(e.target.email))
-            alert('맞는 형식입니다')
+            axios.post('http://127.0.0.1:8000/users/registration/email-check/',{email:signInfo.email})
+            .then(function(response){
+                setPermit({
+                    ...permitSign,
+                    emailDuplicate: true
+                })
+            })
+            .catch(function(error){
+                setPermit({
+                    ...permitSign,
+                    emailDuplicate: false
+                })
+            })
         }else{
             alert('이메일 형식에 맞지 않습니다')
         }
     }
-    // useEffect(() => {
-    //     if(isDuplicate){
-    //         alert('중복된 계정이 존재합니다')
-            // setPermit({
-            //     ...permitSign,
-            //     emailDuplicate: true
-            // })
-    //     }else{
-            // setPermit({
-            //     ...permitSign,
-            //     emailDuplicate: false
-            // })
-    //     }
-    // },[isDuplicateResponse])
+    const checkDuplicateNickname = (e) => {
+        axios.post('http://127.0.0.1:8000/users/registration/nickname-check/',{nickname: signInfo.nickname})
+        .then(function(response){
+            setPermit({
+                ...permitSign,
+                nicknameDuplicate: true
+            })
+        })
+        .catch(function(error){
+            setPermit({
+                ...permitSign,
+                nicknameDuplicate: false
+            })
+        })
+    }
+
     
     const submitSignInfo = () => {
-        console.log('회원가입 정보를 넘겨줍니다')
         if(!(signInfo.email && signInfo.name && signInfo.nickname && signInfo.password)){
             alert('모두 입력해주세요')
         }else if(!permitSign.emailDuplicate){
@@ -117,42 +132,60 @@ const SignForm = () => {
         }else if(!permitSign.passwordSame){
             alert('비밀번호와 비밀번호 확인이 맞지 않습니다')
         }else{
-            // dispatch(register(signInfo))
-            console.log('회원가입을 진행합니다.')
+            axios.post('http://127.0.0.1:8000/users/registration/',{
+                username: signInfo.name,
+                email: signInfo.email,
+                password1: signInfo.password,
+                password2: signInfo.password,
+                nickname: signInfo.nickname,
+                profile_image: null
+            }).then(function(response){
+                alert('회원가입 성공!')
+                navigation('/')
+            })
+            .catch(function(error){
+                alert('실패했습니다. 다시 시도해주세요')
+            })
         }
     }
     return(
         <SignFormPageWrapper>
             <S.SignFromWrapper>
+                <S.LogoPannel>
+            <S.LogoImg src='/asset/image/Forint_logo.png'/>
+            </S.LogoPannel>
             <S.FormText>회원가입</S.FormText>
             <S.FormWrapper>
                 <P.Form>
-                    <P.FormName>Email</P.FormName>
-                    <P.FormInput onChange={onChange} name='email'/>
+                    <P.FormInput onChange={onChange} name='email' placeholder='이메일'/>
                     <S.CheckboxWrapper>
                         <S.CheckBox onClick={checkDuplicateEmail}>
+                        <S.CheckButton/>
                             중복확인
-                            <S.CheckButton/>
                         </S.CheckBox>
                         {permitSign.emailDuplicate && <S.CheckText>확인되었습니다!</S.CheckText>}
+                        {permitSign.emailDuplicate!==null && !permitSign.emailDuplicate && <S.CheckText>중복된 계정이 존재합니다.</S.CheckText>}
                     </S.CheckboxWrapper>
-                    
                 </P.Form>
                 <P.Form>
-                    <P.FormName >PassWord</P.FormName>
-                    <P.FormInput type="password" onChange={onChange} name='password'/>
+                    <P.FormInput type="password" onChange={onChange} name='password'placeholder='비밀번호'/>
                 </P.Form>
                 <P.Form checkPass={permitSign.passwordSame}>
-                    <P.FormName>PassWord Check</P.FormName>
-                    <P.FormInput type="password" onChange={onChange} name='passwordConfirm' ref={pwdRef}/>
+                    <P.FormInput type="password" onChange={onChange} name='passwordConfirm' ref={pwdRef}placeholder='비밀번호 확인'/>
                 </P.Form>
                 <P.Form>
-                    <P.FormName >Name</P.FormName>
-                    <P.FormInput onChange={onChange} name='name'/>
+                    <P.FormInput onChange={onChange} name='name'placeholder='이름'/>
                 </P.Form>
                 <P.Form>
-                    <P.FormName>NickName</P.FormName>
-                    <P.FormInput onChange={onChange} name='nickname'/>
+                    <P.FormInput onChange={onChange} name='nickname' placeholder='닉네임'/>
+                    <S.CheckboxWrapper>
+                        <S.CheckBox onClick={checkDuplicateNickname}>
+                        <S.CheckButton/>
+                            중복확인
+                        </S.CheckBox>
+                        {permitSign.nicknameDuplicate && <S.CheckText>확인되었습니다!</S.CheckText>}
+                        {permitSign.nicknameDuplicate!==null && !permitSign.nicknameDuplicate && <S.CheckText>중복된 닉네임이 존재합니다.</S.CheckText>}
+                    </S.CheckboxWrapper>
                 </P.Form>
             </S.FormWrapper>
             <S.SubmitBtn onClick={() => submitSignInfo()} >회원가입</S.SubmitBtn>

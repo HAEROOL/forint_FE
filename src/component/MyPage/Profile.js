@@ -1,27 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
+import styled from "styled-components";
 import * as S from './Profile.Style'
 import ProfileInfoChange from "./ProfileInfoChange";
-const dummy = {
-    account: 'test@testID.com',
-    nickname: 'dummyNick',
-    name: 'dummyname'
-}
-
-
-const Profile = () => {
+import ProfileInfoNotChange from "./PrifileInfoNotChange";
+import { useDispatch } from "react-redux";
+import logined from "../../api/logined";
+import { useSelector } from "react-redux";
+import MypageHeader from "./MypageHeader";
+import { COLOR } from "../../staticColor";
+const PageWrapper = styled.div`
+    width: 600px;
+    margin: 0 auto;
+    margin-top: -1px;
+    &:before{
+        width: 480px;
+        margin-left: 166px;
+        display: block;
+        content:"";
+        border-top: 1px solid ${COLOR.lightgray};
+    }
+`
+const Profile = ({userInfo}) => {
     return(
+        <PageWrapper>
         <S.ProfilePannel>
-            <S.ProfileContent>
-                <S.Content>
-                    <S.ProfileLabel>EMAIL</S.ProfileLabel>
-                </S.Content>
-                <S.LabelContent>{dummy.account}</S.LabelContent>
-            </S.ProfileContent>
-            <ProfileInfoChange infoname={'NAME'} content={dummy.name}/>
-            <ProfileInfoChange infoname={'NICKNAME'} content={dummy.nickname}/>
-            <ProfileInfoChange infoname={'PASSWORD'} content={null}/>
-            <S.MyFontPannel>당신의 글씨체를 담아드립니다.</S.MyFontPannel>
+            <S.ProfileWrapper>
+                <S.Comment>{userInfo.name}님 안녕하세요</S.Comment>
+                <ProfileInfoNotChange infoname={'이름'} content={userInfo.name}/>
+                <ProfileInfoNotChange infoname={'닉네임'} content={userInfo.nickname}/>
+                <ProfileInfoNotChange infoname={'이메일'} content={userInfo.email}/>
+                <ProfileInfoChange infoname={'비밀번호'} content={null}/>
+            </S.ProfileWrapper>
         </S.ProfilePannel>
+        </PageWrapper>
+        
     )
 }
 

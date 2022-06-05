@@ -6,6 +6,7 @@ import LoginPage from './page/LoginPage';
 import LookOutPage from './page/LookOutPage';
 import MainPage from './page/MainPage';
 import MyPage from './page/MyPage';
+import MyFontPage from './component/MyPage/MyfontPage';
 import SignPage from './page/SignPage';
 import FifthPannel from "./component/FontMake/FifthPannel_DisplayFont";
 import FinalPannel from "./component/FontMake/FinalPannel";
@@ -17,18 +18,24 @@ import Header from './component/Public/Header';
 import { useDispatch } from 'react-redux';
 import { setRefreshOnHeader } from './api/logined';
 import { refresh } from './store/auth';
+import { getCookie } from './component/Shared/Cookies';
 import './App.css';
+import Profile from './component/MyPage/Profile';
 
 const StyledContatiner = styled.div`
 font-family: Noto Sans KR;
     font-weight: 500;
     `
+
+
 function App() {
   const dispatch = useDispatch()
-
   useEffect(() => {
     setRefreshOnHeader();
-    dispatch(refresh())
+    const refreshToken =  getCookie('refresh_token')
+    if(refreshToken){
+      dispatch(refresh(refreshToken))
+    }
   },[]);
   
   return (
@@ -37,17 +44,18 @@ function App() {
     <Routes>
     <Route path='/' element={<MainPage/>}/>
     <Route path='/login' element={<LoginPage/>}/>
-    <Route path='/lookout' element={<LookOutPage/>}/>
     <Route path='/signup' element={<SignPage/>}/>
+    <Route path='/lookout' element={<LookOutPage/>}/>
     <Route path='/fontcreate/*' element={<FontMakePage/>}>
       <Route index element={<FirsrtPannel/>}/>
       <Route path="second" element={<SecondPannel/>}/>
       <Route path="third" element={<ThirdPannel/>}/>
       <Route path="fourth" element={<FourthPannel/>}/>
-      <Route path="fifth" element={<FifthPannel/>}/>
-      <Route path='final' element={<FinalPannel/>}/>
     </Route>
-    <Route path='/mypage' element={<MyPage/>}/>
+    <Route path='/mypage/*' element={<MyPage/>}>
+      <Route index element={<Profile/>}/>
+      <Route path='fonts' element={<MyFontPage/>}/>
+    </Route>
   </Routes>
   </StyledContatiner>
     

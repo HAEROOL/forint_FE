@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
+import logined from "../../api/logined";
 const DisplayWrapper = styled.div`
     width: 400px;
     height: 340px;
@@ -45,27 +47,19 @@ const FontPannel = styled.div`
         margin: 0 auto;
         margin-top: 153px;
     }
-    @font-face{
-        font-family: ${props => props.fontsrc.fontFamily};
-        font-sltyle: ${props => props.fontsrc.fontStyle};
-        font-weight: ${props => props.fontsrc.fontStyle};
-        font-display: swap format('woff2');
-        src: url(${props => props.fontsrc.src}) ;
-    }
-    font-family: '${props => props.fontsrc.fontFamily}';
-    font-style: normal;
-    font-weight: 400;
 `
 const DetailContainer = styled.div`
     display: flex;
     width: 90%;
     margin: 0 auto;
     justify-content: space-between;
+    &:hover{
+        cursor: pointer;
+    }
 `
 const GoodBtn = styled.div`
     display: flex;
     width: 56px;
-    justify-content: space-between;
     align-items: center;
     
 `
@@ -78,7 +72,7 @@ const Icon = styled.img`
 const Rate = styled.span`
     font-size: 18px;
     font-weight: 700;
-    margin-left: 1px;
+    margin-left: 5px;
 `
 const DownloadBtn = styled.div`
     padding: 2px 6px;
@@ -86,30 +80,65 @@ const DownloadBtn = styled.div`
     cursor: pointer;
 `
 
+const FontView = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
 
 const FontDisplay = ({data}) => {
-    const [likeRate, setRate] = useState(data.like)
-    const dummyFont = {
-        fontFamily: data.title,
+    const [likeRate, setRate] = useState(data.like_num)
+    const [isLiked, setLike] = useState(false)
+    const [fileData, setData] = useState(null)
+    const userFont = {
+        fontFamily: data.name,
         fontStyle: 'normal',
         fontWeight: 400,
-        fontDisplay: 'block',
-        src: data.src
+        fontDisplay: 'swap',
+        src: data.fontSrc
     }
 
     const clickLikeBtn = () => {
-        setRate(likeRate+1)
+        if(!isLiked){
+            setRate(likeRate+1)
+            setLike(true)
+        }else{
+            setRate(likeRate-1)
+            setLike(false)
+        }
+        
+    }
+
+    const downloadFile = (file) => {
+        const filename = 'source.ttf'
+        axios.get('http://127.0.0.1:8000/media/font/admin%40admin.com/jua.ttf',{
+            responseType: 'arraybuffer',
+            // data: ""
+        })
+        .then((response) => {
+            console.log(response)
+            const blob = new Blob([response.data])
+            const path = window.URL.createObjectURL(blob)
+            const link = document.createElement('a')
+            link.href = path
+            link.download = filename
+            link.click()
+            link.remove()
+        })
     }
     return(
         <DisplayWrapper>
             <AnimationWrapper>
-            <FontPannel fontsrc={dummyFont}>{data.title}</FontPannel>
+            <FontPannel fontsrc={userFont}>
+            < FontView src={data.file} alt="asdf"/>
+            </FontPannel>
+
             <DetailContainer>
                 <GoodBtn onClick={() => clickLikeBtn()}>
-                    <Icon src="/asset/image/HeartIcon.svg"/>
+                    {isLiked?<Icon src="/asset/image/HeartIcon_FILL.svg"/>:<Icon src="/asset/image/HeartIcon.svg"/>}
                     <Rate>{likeRate}</Rate>
                 </GoodBtn>
-                <DownloadBtn>다운로드</DownloadBtn>
+                <DownloadBtn onClick={() =>downloadFile(data.file)}>다운로드</DownloadBtn>
             </DetailContainer>
             </AnimationWrapper>
         </DisplayWrapper>
