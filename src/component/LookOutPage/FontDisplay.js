@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
-import logined from "../../api/logined";
 const DisplayWrapper = styled.div`
     width: 400px;
     height: 340px;
@@ -18,7 +17,7 @@ const AnimationWrapper = styled.div`
     right: 0px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    transition: all 0.3s;
+    transition: all 0.2s ease;
     padding-bottom: 5px;
     &:hover{
         box-shadow: 2px 2px 10px silver;
@@ -26,19 +25,14 @@ const AnimationWrapper = styled.div`
         right: 2px;
     }
 `
-const FontTitle = styled.div`
-    font-size: 15px;
-    color: #ddd;
-    overflow: visible;
-    margin-bottom: 14px;
-    
-`
+
 const FontPannel = styled.div`
     height: 212px;
     padding: 22px 14px;
     background: #fff;
     font-size: 30px;
     text-align: center;
+    border-radius: 10px;
     &:after{
         content: "";
         display: block;
@@ -89,7 +83,6 @@ const FontView = styled.img`
 const FontDisplay = ({data}) => {
     const [likeRate, setRate] = useState(data.like_num)
     const [isLiked, setLike] = useState(false)
-    const [fileData, setData] = useState(null)
     const userFont = {
         fontFamily: data.name,
         fontStyle: 'normal',
@@ -116,7 +109,6 @@ const FontDisplay = ({data}) => {
             // data: ""
         })
         .then((response) => {
-            console.log(response)
             const blob = new Blob([response.data])
             const path = window.URL.createObjectURL(blob)
             const link = document.createElement('a')
@@ -130,7 +122,7 @@ const FontDisplay = ({data}) => {
         <DisplayWrapper>
             <AnimationWrapper>
             <FontPannel fontsrc={userFont}>
-            < FontView src={data.file} alt="asdf"/>
+            < FontView src={'/asset/image/Template.jpg'} alt="asdf"/>
             </FontPannel>
 
             <DetailContainer>

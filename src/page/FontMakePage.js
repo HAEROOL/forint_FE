@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, useLocation, useNavigate } from "react-router";
 import styled from "styled-components";
-import FifthPannel from "../component/FontMake/FifthPannel_DisplayFont";
-import FinalPannel from "../component/FontMake/FinalPannel";
 import FirsrtPannel from "../component/FontMake/FirstPannel_DownTemplete";
 import FourthPannel from "../component/FontMake/FourthPage_CompleteFont";
 import SecondPannel from "../component/FontMake/SecondPannel_Upload";

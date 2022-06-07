@@ -26,7 +26,6 @@ const DisplayPannel = () => {
             setArray(response.data)
         })
     },[])
-    console.log(fontDataArray)
     return(
         <Pannel>
             <RowPannel>

@@ -61,7 +61,6 @@ const FirsrtPannel = () => {
     const clickBtn = () => {
         setPage(page+1)
     }
-    console.log(page%2)
     return (
         <S.Container>
             <S.CommandText>템플릿을 다운받아 작성 해주세요.</S.CommandText>
