@@ -79,12 +79,13 @@ const FontDetail = ({font}) => {
     return (
         <Pannel>
             <FontWrapper>
-            {font.previews.map((img) => (
-                <>
-                <FontImg src={img.path} style={{width: '28px'}}alt="font" key={img.id}/>
-                {img.id===25?<br/>:null}
-                </>
-            ))}
+            {font.previews.length===0?<div>폰트 생성중입니다...</div>:
+                    font.previews.map((img) => (
+                        <>
+                        <FontImg src={img.path} style={{width: '28px'}}alt="font" key={img.id}/>
+                        {img.name==='요'?<br/>:null}
+                        </>
+                    ))}
             </FontWrapper>
             <Detail>
             <div style={{display: 'flex',justifyContent: 'end'}}>

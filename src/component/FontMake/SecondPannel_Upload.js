@@ -116,10 +116,11 @@ const SecondPannel = () => {
             formData.append('owner', sessionStorage.getItem('userAccount'))
             logined.post('/fonts/',formData)
             setComplete(true)
+            alert('제출되었습니다!')
             .then((response) => {
 
             }).catch(e => {
-                console.log(e)
+                alert('오류 발생! 다시 시도해주세요')
             })
         }else{
             alert('작성한 템플릿을 업로드 하고 원하는 폰트 이름을 입력해주세요. 이름이 중복되었는지 확인해주세요.')
