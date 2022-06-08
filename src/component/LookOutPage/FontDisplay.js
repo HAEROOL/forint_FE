@@ -39,7 +39,7 @@ const FontPannel = styled.div`
         border-bottom: 1px solid #ddd;
         width: 98%;
         margin: 0 auto;
-        margin-top: 70px;
+        margin-top: 0px;
     }
 `
 const DetailContainer = styled.div`
@@ -74,7 +74,11 @@ const DownloadBtn = styled.div`
     cursor: pointer;
 `
 
-
+const NameWrapper = styled.div`
+    font-size: 20px;
+    text-align: center;
+    margin-top: 50px;
+`
 const FontDisplay = ({data}) => {
     const [fontData, setData] = useState(null)
     const [likeRate, setRate] = useState(data.like_num)
@@ -136,9 +140,10 @@ const FontDisplay = ({data}) => {
             {data.previews?.map((img) => (
                 <>
                 <img src={img.path} style={{width: '45px'}}alt="font" key={img.id}/>
-                {img.id===25?<br/>:null}
+                {img.name==='요'?<br/>:null}
                 </>
             ))}
+            <NameWrapper>{data.name}</NameWrapper>
             </FontPannel>
 
             <DetailContainer>
