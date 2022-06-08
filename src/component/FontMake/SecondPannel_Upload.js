@@ -98,7 +98,7 @@ const BoxWrapper = styled.div`
 const SecondPannel = () => {
     const [img, setImage] = useState(null)
     const [name, setName] = useState(null)
-    const [isComplete, setComplete] = useState(false);
+    const [isComplete, setComplete] = useState(true);
     const [isNotDup, setDup] = useState(false)
     const onChange = (e) => {
         setImage(e.target.files[0])
@@ -171,7 +171,7 @@ const SecondPannel = () => {
                 <S.StepPannel>
                 <S.PrevBtn to='/fontcreate'>PREV</S.PrevBtn>
                 {isComplete?
-                <S.NextBtn to='/fontcreate/fourth' onClick={onClick}>NEXT</S.NextBtn>:
+                <S.NextBtn to='/fontcreate/fourth'>NEXT</S.NextBtn>:
                 <DisableBtn>NEXT</DisableBtn>
                 }
                 
