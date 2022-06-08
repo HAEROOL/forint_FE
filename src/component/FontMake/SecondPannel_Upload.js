@@ -98,7 +98,7 @@ const BoxWrapper = styled.div`
 const SecondPannel = () => {
     const [img, setImage] = useState(null)
     const [name, setName] = useState(null)
-    const [isComplete, setComplete] = useState(true);
+    const [isComplete, setComplete] = useState(false);
     const [isNotDup, setDup] = useState(false)
     const onChange = (e) => {
         setImage(e.target.files[0])
