@@ -39,7 +39,7 @@ const MyFontPage = ({fonts}) => {
     return(
         <PageWrapper>
         <S.ProfilePannel>
-            {fonts?<FontDetailPannel fontList={fonts}/>
+            {fonts.length>0?<FontDetailPannel fontList={fonts}/>
             :
             <RecommendPannel>
                 <span>

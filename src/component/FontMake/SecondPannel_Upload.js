@@ -93,10 +93,13 @@ const SecondPannel = () => {
             const formData = new FormData();
             formData.append('file', img)
             formData.append('name', name)
+            formData.append('ttf_file', "")
+            formData.append('woff_file', "")
             formData.append('owner', sessionStorage.getItem('userAccount'))
             logined.post('/fonts/',formData)
+            setComplete(true)
             .then((response) => {
-                setComplete(true)
+
             }).catch(e => {
                 console.log(e)
             })

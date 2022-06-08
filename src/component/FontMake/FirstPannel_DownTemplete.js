@@ -56,6 +56,14 @@ position: relative;
     transition: 0.2 ease;
 }
 `
+
+const ImageWrapper = styled.div`
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+`
+
+
 const FirsrtPannel = () => {
     const [page, setPage] = useState(0)
     const clickBtn = () => {
@@ -87,10 +95,18 @@ const FirsrtPannel = () => {
                     <Arrow page={page%2 === 0}/>
                     주의사항 보기
                 </PageBtn>
-                <WarningText>
+                <WarningText style={{marginTop: '-37px'}}>
                     <img src="/asset/image/Bulb.png" alt="warn"/>
                     작성예시
                 </WarningText>
+                <ImageWrapper>
+                    <div>
+                        <img style={{width:'100px'}} src="/asset/image/example_right.png" alt="example1"/>
+                        </div>
+                        <div>
+                        <img style={{width:'100px'}} src="/asset/image/example_wrong.png" alt="example1"/>
+                        </div>
+                    </ImageWrapper>
             </>}
             </S.Pannel>
             <S.DownloadBtnPannel>

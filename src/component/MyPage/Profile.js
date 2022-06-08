@@ -25,11 +25,17 @@ const Profile = ({userInfo}) => {
         <PageWrapper>
         <S.ProfilePannel>
             <S.ProfileWrapper>
+                {userInfo.name?
+                <>
                 <S.Comment>{userInfo.name}님 안녕하세요</S.Comment>
                 <ProfileInfoNotChange infoname={'이름'} content={userInfo.name}/>
                 <ProfileInfoNotChange infoname={'닉네임'} content={userInfo.nickname}/>
                 <ProfileInfoNotChange infoname={'이메일'} content={userInfo.email}/>
                 <ProfileInfoChange infoname={'비밀번호'} content={null}/>
+                </>
+                :
+                <div style={{fontSize:'25px'}}>로딩중입니다...</div>}
+                
             </S.ProfileWrapper>
         </S.ProfilePannel>
         </PageWrapper>

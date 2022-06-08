@@ -34,7 +34,11 @@ export const CheckBox = styled.div`
     display: flex;
     align-items: center;
     font-size: 20px;
-    color: ${COLOR.gray}
+    color: ${COLOR.gray};
+    cursor: pointer;
+    &:hover{
+        color: black;
+    }
 `
 export const CheckboxWrapper = styled.div`
     width: 370px;

@@ -55,10 +55,13 @@ const Detail = styled.div`
     flex-direction: column;
     justify-content: space-between;
 `
+const FontWrapper = styled.div`
+    margin: auto 0;
+`
 const FontDetail = ({font}) => {
-    const downloadFile = (file) => {
-        const filename = 'source.ttf'
-        axios.get('http://127.0.0.1:8000/media/font/admin%40admin.com/jua.ttf',{
+    const downloadFile = (filePath) => {
+        const filename = `${font.name}.ttf`
+        axios.get(filePath,{
             responseType: 'arraybuffer',
             // data: ""
         })
@@ -72,15 +75,23 @@ const FontDetail = ({font}) => {
             link.remove()
         })
     }
+    console.log(font.previews)
     return (
         <Pannel>
-            <FontImg src={font.file} alt="font"/>
+            <FontWrapper>
+            {font.previews.map((img) => (
+                <>
+                <FontImg src={img.path} style={{width: '28px'}}alt="font" key={img.id}/>
+                {img.id===25?<br/>:null}
+                </>
+            ))}
+            </FontWrapper>
             <Detail>
             <div style={{display: 'flex',justifyContent: 'end'}}>
                 <Icon src="/asset/image/HeartIcon_FILL.svg" alt="heart"/>
                 <Rate>{font.like_users.length}</Rate>
             </div>
-            <DownloadBtn onClick={downloadFile}>다운로드</DownloadBtn>
+            <DownloadBtn onClick={() => downloadFile(font.ttf_file)}>다운로드</DownloadBtn>
             </Detail>
             
         </Pannel>
