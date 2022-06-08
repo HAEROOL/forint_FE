@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 const DisplayWrapper = styled.div`
     width: 400px;
@@ -28,18 +28,18 @@ const AnimationWrapper = styled.div`
 
 const FontPannel = styled.div`
     height: 212px;
-    padding: 22px 14px;
     background: #fff;
     font-size: 30px;
     text-align: center;
     border-radius: 10px;
+    margin: 70px 0 0 0;
     &:after{
         content: "";
         display: block;
         border-bottom: 1px solid #ddd;
         width: 98%;
         margin: 0 auto;
-        margin-top: 153px;
+        margin-top: 70px;
     }
 `
 const DetailContainer = styled.div`
@@ -74,37 +74,40 @@ const DownloadBtn = styled.div`
     cursor: pointer;
 `
 
-const FontView = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-`
 
 const FontDisplay = ({data}) => {
+    const [fontData, setData] = useState(null)
     const [likeRate, setRate] = useState(data.like_num)
     const [isLiked, setLike] = useState(false)
-    const userFont = {
-        fontFamily: data.name,
-        fontStyle: 'normal',
-        fontWeight: 400,
-        fontDisplay: 'swap',
-        src: data.fontSrc
-    }
+
 
     const clickLikeBtn = () => {
         if(!isLiked){
             setRate(likeRate+1)
             setLike(true)
+            const account = sessionStorage.getItem('userAccount')
+            console.log([...data.like_users,account])
+            if(sessionStorage.getItem('userAccount')){
+                axios.patch(`http://218.150.183.52:8000/fonts/${data.name}/`,{like_users:[...data.like_users,account]})
+            }else{
+                alert('로그인 해주세요')
+            }
         }else{
             setRate(likeRate-1)
             setLike(false)
+            const account = sessionStorage.getItem('userAccount')
+            const deleteAccountList = data.like_users.filter((useraccount) => useraccount !== account)
+            if(sessionStorage.getItem('userAccount')){
+                axios.patch(`http://218.150.183.52:8000/fonts/${data.name}/`,{like_users:deleteAccountList})
+            }else{
+                alert('로그인 해주세요')
+            }
         }
         
     }
-
-    const downloadFile = (file) => {
-        const filename = 'source.ttf'
-        axios.get('http://127.0.0.1:8000/media/font/admin%40admin.com/jua.ttf',{
+    const downloadFile = () => {
+        const filename = `${data.name}.ttf`
+        axios.get(data.ttf_file,{
             responseType: 'arraybuffer',
             // data: ""
         })
@@ -118,19 +121,32 @@ const FontDisplay = ({data}) => {
             link.remove()
         })
     }
+
+    useEffect(() => {
+        if(Object.keys(data).length > 0){
+            console.log( data.like_users.indexOf(sessionStorage.getItem('userAccount')))
+            data.like_users.indexOf(sessionStorage.getItem('userAccount'))===-1?setLike(false):setLike(true)
+            setRate(data.like_num)
+        }
+    }, [data])
     return(
         <DisplayWrapper>
             <AnimationWrapper>
-            <FontPannel fontsrc={userFont}>
-            < FontView src={'/asset/image/Template.jpg'} alt="asdf"/>
+            <FontPannel>
+            {data.previews?.map((img) => (
+                <>
+                <img src={img.path} style={{width: '45px'}}alt="font" key={img.id}/>
+                {img.id===25?<br/>:null}
+                </>
+            ))}
             </FontPannel>
 
             <DetailContainer>
-                <GoodBtn onClick={() => clickLikeBtn()}>
+                <GoodBtn onClick={clickLikeBtn}>
                     {isLiked?<Icon src="/asset/image/HeartIcon_FILL.svg"/>:<Icon src="/asset/image/HeartIcon.svg"/>}
                     <Rate>{likeRate}</Rate>
                 </GoodBtn>
-                <DownloadBtn onClick={() =>downloadFile(data.file)}>다운로드</DownloadBtn>
+                <DownloadBtn onClick={() =>downloadFile()}>다운로드</DownloadBtn>
             </DetailContainer>
             </AnimationWrapper>
         </DisplayWrapper>

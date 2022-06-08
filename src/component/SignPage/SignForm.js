@@ -90,7 +90,7 @@ const SignForm = () => {
 
     const checkDuplicateEmail = (e) => {
         if(checkEmailRegEx(signInfo.email)){
-            axios.post('http://127.0.0.1:8000/users/registration/email-check/',{email:signInfo.email})
+            axios.post('http://218.150.183.52:8000/users/registration/email-check/',{email:signInfo.email})
             .then(function(response){
                 setPermit({
                     ...permitSign,
@@ -108,7 +108,8 @@ const SignForm = () => {
         }
     }
     const checkDuplicateNickname = (e) => {
-        axios.post('http://127.0.0.1:8000/users/registration/nickname-check/',{nickname: signInfo.nickname})
+        if(signInfo.nickname){
+            axios.post('http://218.150.183.52:8000/users/registration/nickname-check/',{nickname: signInfo.nickname})
         .then(function(response){
             setPermit({
                 ...permitSign,
@@ -121,6 +122,9 @@ const SignForm = () => {
                 nicknameDuplicate: false
             })
         })
+        }else{
+            alert('닉네임을 입력해주세요')
+        }
     }
 
     
@@ -132,7 +136,7 @@ const SignForm = () => {
         }else if(!permitSign.passwordSame){
             alert('비밀번호와 비밀번호 확인이 맞지 않습니다')
         }else{
-            axios.post('http://127.0.0.1:8000/users/registration/',{
+            axios.post('http://218.150.183.52:8000/users/registration/',{
                 username: signInfo.name,
                 email: signInfo.email,
                 password1: signInfo.password,
@@ -160,7 +164,6 @@ const SignForm = () => {
                     <P.FormInput onChange={onChange} name='email' placeholder='이메일'/>
                     <S.CheckboxWrapper>
                         <S.CheckBox onClick={checkDuplicateEmail}>
-                        <S.CheckButton/>
                             중복확인
                         </S.CheckBox>
                         {permitSign.emailDuplicate && <S.CheckText>확인되었습니다!</S.CheckText>}
@@ -180,7 +183,6 @@ const SignForm = () => {
                     <P.FormInput onChange={onChange} name='nickname' placeholder='닉네임'/>
                     <S.CheckboxWrapper>
                         <S.CheckBox onClick={checkDuplicateNickname}>
-                        <S.CheckButton/>
                             중복확인
                         </S.CheckBox>
                         {permitSign.nicknameDuplicate && <S.CheckText>확인되었습니다!</S.CheckText>}
