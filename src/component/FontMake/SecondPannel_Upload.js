@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logined from "../../api/logined";
 import * as S from './Public.style'
 import { COLOR } from "../../staticColor";
+import axios from "axios";
 export const UploadBtn = styled.label`
     width: 300px;
     height: 70px;
@@ -78,10 +79,27 @@ const WarningText = styled.div`
     color: ${COLOR.red};
     font-size: 20px;
 `
+const CheckBox = styled.div`
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: ${COLOR.gray};
+    cursor: pointer;
+    &:hover{
+        color: black;
+    }
+`
+
+const BoxWrapper = styled.div`
+    width: 39%;
+    display: flex;
+    justify-content: space-between;
+`
 const SecondPannel = () => {
     const [img, setImage] = useState(null)
     const [name, setName] = useState(null)
     const [isComplete, setComplete] = useState(false);
+    const [isNotDup, setDup] = useState(false)
     const onChange = (e) => {
         setImage(e.target.files[0])
     }
@@ -89,7 +107,7 @@ const SecondPannel = () => {
         setName(e.target.value)
     }
     const onClick = async() => {
-        if(name && img){
+        if(name && img && isNotDup){
             const formData = new FormData();
             formData.append('file', img)
             formData.append('name', name)
@@ -104,7 +122,26 @@ const SecondPannel = () => {
                 console.log(e)
             })
         }else{
-            alert('작성한 템플릿을 업로드 하고 원하는 폰트 이름을 입력해주세요')
+            alert('작성한 템플릿을 업로드 하고 원하는 폰트 이름을 입력해주세요. 이름이 중복되었는지 확인해주세요.')
+        }
+    }
+    const checkDuplicate = () => {
+        if(name){
+            axios.post('http://218.150.183.52:8000/fonts/name-check/',{name:name})
+            .then((response) => {
+                console.log(response)
+                if(response.data.detail==='You can use this Name :)'){
+                    setDup(true)
+                    alert('사용가능한 이름입니다!')
+                }else{
+                    alert('중복되었거나 불가능한 이름입니다.')
+                }
+            })
+            .catch(e => {
+                alert('오류가 발생했습니다. 다시 시도해주세요')
+            })
+        }else{
+            alert('닉네임을 작성해주세요')
         }
     }
     return (
@@ -116,12 +153,17 @@ const SecondPannel = () => {
                     템플릿을 업로드 하고 폰트 이름을 입력한 뒤, 제출 버튼을 눌러주세요
                 </WarningText>
             <S.DownloadBtnPannel>
-                
                 <form>
                     <UploadBtn htmlFor='upload-file'>템플릿 업로드</UploadBtn>
                     <input type="file" id="upload-file" onChange={onChange} style={{display:"none"}} required/>
                     <FontNameInput placeholder="폰트 이름을 정해주세요" required onChange={nameChange}/>
                 </form>
+                <BoxWrapper>
+                <CheckBox onClick={checkDuplicate}>중복확인</CheckBox>
+                <span style={{color:COLOR.red, marginTop:'2px'}}>폰트이름은 영어로 작성해주세요</span>
+                </BoxWrapper>
+                
+                
                 </S.DownloadBtnPannel>
             </S.Pannel>
             <SubmitBtn onClick={onClick}>제출</SubmitBtn>
