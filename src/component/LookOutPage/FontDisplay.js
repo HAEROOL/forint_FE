@@ -128,12 +128,12 @@ const FontDisplay = ({data}) => {
 
     useEffect(() => {
         if(Object.keys(data).length > 0){
-            console.log( data.like_users.indexOf(sessionStorage.getItem('userAccount')))
             data.like_users.indexOf(sessionStorage.getItem('userAccount'))===-1?setLike(false):setLike(true)
             setRate(data.like_num)
         }
     }, [data])
     return(
+        data.previews?
         <DisplayWrapper>
             <AnimationWrapper>
             <FontPannel>
@@ -155,6 +155,7 @@ const FontDisplay = ({data}) => {
             </DetailContainer>
             </AnimationWrapper>
         </DisplayWrapper>
+        :null
     )
 }
 
