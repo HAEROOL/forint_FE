@@ -128,7 +128,7 @@ const SecondPannel = () => {
     }
     const checkDuplicate = () => {
         if(name){
-            axios.post('http://218.150.183.52:8000/fonts/name-check/',{name:name})
+            axios.post(`${process.env.REACT_APP_API_URL}/fonts/name-check/`,{name:name})
             .then((response) => {
                 console.log(response)
                 if(response.data.detail==='You can use this Name :)'){

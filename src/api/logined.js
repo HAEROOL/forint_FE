@@ -6,7 +6,7 @@ const check = getCookie('refresh_token');
 
 const logined = axios.create({});
 
-logined.defaults.baseURL = 'http://218.150.183.52:8000/';
+logined.defaults.baseURL = `${process.env.REACT_APP_API_URL}/`;
 // logined.defaults.baseURL = 'http://127.0.0.1:8000/';
 
 export const setRefreshOnHeader = () => {

@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         "/static/image/template.jpg",
         createProxyMiddleware({
-            target: "http://218.150.183.52:8000/",
+            target: `${process.env.REACT_APP_API_URL}/`,
             chageOrigin: true,
         })
     )

@@ -25,7 +25,7 @@ const DisplayPannel = () => {
         }
     ])
     useEffect(() => {
-        axios.get('http://218.150.183.52:8000/fonts/')
+        axios.get(`${process.env.REACT_APP_API_URL}/fonts/`)
         .then((response) => {
             setArray(response.data)
         })

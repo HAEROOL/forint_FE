@@ -3,10 +3,8 @@ import styled from "styled-components";
 import * as S from './SignForm.style'
 import * as P from '../Public/FormStyle'
 import { useDispatch } from "react-redux";
-import { register} from "../../store/auth";
-import { useEffect } from "react";
+
 import { checkEmailRegEx } from "../utils/checkRefExp";
-import { useSelector } from "react-redux";
 import axios from "axios";
 import { useNavigate } from "react-router";
 const SignFormPageWrapper = styled.div`
@@ -90,7 +88,7 @@ const SignForm = () => {
 
     const checkDuplicateEmail = (e) => {
         if(checkEmailRegEx(signInfo.email)){
-            axios.post('http://218.150.183.52:8000/users/registration/email-check/',{email:signInfo.email})
+            axios.post(`${process.env.REACT_APP_API_URL}/users/registration/email-check/`,{email:signInfo.email})
             .then(function(response){
                 setPermit({
                     ...permitSign,
@@ -109,7 +107,7 @@ const SignForm = () => {
     }
     const checkDuplicateNickname = (e) => {
         if(signInfo.nickname){
-            axios.post('http://218.150.183.52:8000/users/registration/nickname-check/',{nickname: signInfo.nickname})
+            axios.post(`${process.env.REACT_APP_API_URL}/users/registration/nickname-check/`,{nickname: signInfo.nickname})
         .then(function(response){
             setPermit({
                 ...permitSign,
@@ -136,7 +134,7 @@ const SignForm = () => {
         }else if(!permitSign.passwordSame){
             alert('비밀번호와 비밀번호 확인이 맞지 않습니다')
         }else{
-            axios.post('http://218.150.183.52:8000/users/registration/',{
+            axios.post(`${process.env.REACT_APP_API_URL}/users/registration/`,{
                 username: signInfo.name,
                 email: signInfo.email,
                 password1: signInfo.password,

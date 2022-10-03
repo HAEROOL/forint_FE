@@ -92,7 +92,7 @@ const FontDisplay = ({data}) => {
             const account = sessionStorage.getItem('userAccount')
             console.log([...data.like_users,account])
             if(sessionStorage.getItem('userAccount')){
-                axios.patch(`http://218.150.183.52:8000/fonts/${data.name}/`,{like_users:[...data.like_users,account]})
+                axios.patch(`${process.env.REACT_APP_API_URL}fonts/${data.name}/`,{like_users:[...data.like_users,account]})
             }else{
                 alert('로그인 해주세요')
             }
@@ -102,7 +102,7 @@ const FontDisplay = ({data}) => {
             const account = sessionStorage.getItem('userAccount')
             const deleteAccountList = data.like_users.filter((useraccount) => useraccount !== account)
             if(sessionStorage.getItem('userAccount')){
-                axios.patch(`http://218.150.183.52:8000/fonts/${data.name}/`,{like_users:deleteAccountList})
+                axios.patch(`${process.env.REACT_APP_API_URL}/fonts/${data.name}/`,{like_users:deleteAccountList})
             }else{
                 alert('로그인 해주세요')
             }

@@ -1,8 +1,8 @@
 import logined from './logined';
 import axios from 'axios';
-export const login = ({ account, password }) => axios.post('http://218.150.183.52:8000/users/login/', { email:account, password:password });
+export const login = ({ account, password }) => axios.post(`${process.env.REACT_APP_API_URL}/users/login/`, { email:account, password:password });
 export const register = ({signInfo}) => 
-axios.post('http://218.150.183.52:8000/users/registration/', {
+axios.post(`${process.env.REACT_APP_API_URL}/users/registration/`, {
     username: signInfo.name,
     email: signInfo.email,
     password1: signInfo.password,
@@ -11,10 +11,10 @@ axios.post('http://218.150.183.52:8000/users/registration/', {
     profile_image: null
 })
 export const checkEmail = ({email}) => {
-    axios.post('http://218.150.183.52:8000/users/registration/email-check/',{email: email})
+    axios.post(`${process.env.REACT_APP_API_URL}/users/registration/email-check/`,{email: email})
 }
 export const checkNickname = ({nickname}) => {
-    axios.post('http://218.150.183.52:8000/users/registration/nickname-check/',{nickname: nickname})
+    axios.post(`${process.env.REACT_APP_API_URL}/users/registration/nickname-check/`,{nickname: nickname})
 }
 export const refresh = (token) => logined.post('users/token/refresh/',{refresh:token});
 export const getUserInfo = (email) => {
